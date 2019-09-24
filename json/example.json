@@ -1,0 +1,25 @@
+{
+  "name":"Luis",
+  "email":"name@gmail.com",
+  "password":"336E3D863781A03FCAB25C8091066300",
+  "expensesList": [
+    {
+      "expenseID": 0,
+      "name": "Mortgage",
+      "qty": 10000,
+      "frequency": "Monthly",
+      "category": "loging",
+      "date": "1-1-1980",
+      "in": False
+    },
+    {
+      "expenseID": 1,
+      "name": "Salary",
+      "qty": 15000,
+      "frequency": "Monthly",
+      "category": "salary",
+      "date": "1-1-1980",
+      "in": True
+    }
+  ]
+}
