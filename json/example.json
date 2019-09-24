@@ -10,7 +10,7 @@
       "frequency": "Monthly",
       "category": "loging",
       "date": "1-1-1980",
-      "in": False
+      "in": false
     },
     {
       "expenseID": 1,
@@ -19,7 +19,7 @@
       "frequency": "Monthly",
       "category": "salary",
       "date": "1-1-1980",
-      "in": True
+      "in": true
     }
   ]
 }
