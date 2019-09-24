@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" id="2" x="520" y="27" width="568" height="949" measuredWidth="568" measuredHeight="949">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Devices/Nexus%206.screen#Nexus%206"/>
+    <overrides>
+      <widgets ref="1" width="568" height="949"/>
+      <widgets ref="7" width="522" height="805"/>
+      <widgets ref="129" x="26" y="83" width="510" height="27"/>
+      <widgets ref="130" width="510" height="27"/>
+      <widgets ref="131" y="5"/>
+      <widgets ref="132" x="408" y="5"/>
+      <widgets ref="133" x="426" y="5"/>
+      <widgets ref="134" x="446" y="5"/>
+      <widgets ref="135" x="464" y="1"/>
+      <widgets ref="77" y="834" width="522"/>
+      <widgets ref="78" width="522"/>
+      <widgets ref="79" x="112"/>
+      <widgets ref="81" x="237"/>
+      <widgets ref="83" x="362"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Window" id="16" x="551" y="200" width="458" height="627" text="Welcome Mapache! Please enter your expenses:" measuredWidth="458" measuredHeight="627"/>
+  <widgets xsi:type="model:WidgetGroup" id="69" x="561" y="232" width="433" measuredWidth="433" measuredHeight="573">
+    <widgets xsi:type="model:TabbedPane" id="68" width="433" height="573" text="New Expense, Expenses Report, List of Expenses&#xD;&#xA;" measuredWidth="433" measuredHeight="573" selection="0">
+      <items x="10" y="0" width="109" height="36" text="New Expense"/>
+      <items x="119" y="0" width="130" height="36" text="Expenses Report"/>
+      <items x="249" y="0" width="125" height="36" text="List of Expenses"/>
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Master" id="44" x="1101" y="27" measuredWidth="872" measuredHeight="803">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Devices/Nexus%206.screen#Nexus%206%20Landscape"/>
+    <overrides>
+      <widgets ref="4" height="803"/>
+      <widgets ref="8" height="757"/>
+      <widgets ref="136" y="43" width="-1" height="43"/>
+      <widgets ref="137" height="43"/>
+      <widgets ref="138" y="12"/>
+      <widgets ref="139" y="12"/>
+      <widgets ref="140" y="12"/>
+      <widgets ref="141" y="12"/>
+      <widgets ref="142" y="8"/>
+      <widgets ref="98" height="757"/>
+      <widgets ref="99" height="757"/>
+      <widgets ref="100" y="232"/>
+      <widgets ref="102" y="357"/>
+      <widgets ref="104" y="482"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="1" x="48" y="22" measuredWidth="456" measuredHeight="872">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Devices/Nexus%206.screen#Nexus%206"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="10" x="76" y="248" width="317" height="289" text="Welcom to Expense Tracker" measuredWidth="317" measuredHeight="289"/>
+  <widgets xsi:type="model:TextField" id="4" x="188" y="301" width="175" text="Mapache" measuredWidth="175" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="5" x="188" y="365" width="175" text="**********" measuredWidth="175" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="6" x="188" y="333" width="175" text="mapache@gmail.com" measuredWidth="175" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="8" x="86" y="277" text="Please enter your information:" measuredWidth="204" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="11" x="96" y="333" text="Email" measuredWidth="43" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="12" x="98" y="301" text="Name" measuredWidth="46" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="13" x="86" y="365" text="Password" measuredWidth="67" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="14" x="85" y="500" text="OK" measuredWidth="40" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="15" x="160" y="500" text="Cancel" measuredWidth="64" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="17" x="710" y="301" width="175" text="Expense Name" measuredWidth="175" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="18" x="600" y="301" text="Expense Name" measuredWidth="104" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="19" x="710" y="335" width="175" text="$$" measuredWidth="175" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="20" x="620" y="335" text="Quantity" measuredWidth="62" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="22" x="620" y="370" text="Frequency" measuredWidth="73" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:List" id="23" x="710" y="370" width="175" text="(o) Monthly 1 (selected)&#xA;( ) Yearly&#xA;( ) Weeklty" measuredWidth="175" measuredHeight="88" alpha="0">
+    <font/>
+    <items x="0" y="2" width="175" height="28" text="(o) Monthly 1 (selected)"/>
+    <items x="0" y="30" width="175" height="28" text="( ) Yearly"/>
+    <items x="0" y="58" width="175" height="28" text="( ) Weeklty"/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="24" x="613" y="750" text="Submit and Add one more" measuredWidth="196" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="25" x="821" y="750" text="Cancel" measuredWidth="64" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="26" x="595" y="658" width="104" text="Income/Outcome" measuredWidth="104" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:List" id="27" x="710" y="658" width="175" text="(o) Outcome 1 (selected)&#xA;( ) Income" measuredWidth="175" measuredHeight="60" alpha="0">
+    <font/>
+    <items x="0" y="2" width="175" height="28" text="(o) Outcome 1 (selected)"/>
+    <items x="0" y="30" width="175" height="28" text="( ) Income"/>
+  </widgets>
+  <widgets xsi:type="model:Window" id="30" x="1205" y="131" width="641" height="665" text="Here are your results expense report Mapache!" measuredWidth="641" measuredHeight="665"/>
+  <widgets xsi:type="model:Button" id="38" x="1347" y="750" text="Cancel" measuredWidth="64" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" id="45" x="1221" y="163" width="609" height="573" text="Expenses Report, New Expense, List of Expenses&#xD;&#xA;" measuredWidth="609" measuredHeight="573" selection="0">
+    <items x="10" y="0" width="130" height="36" text="Expenses Report"/>
+    <items x="140" y="0" width="109" height="36" text="New Expense"/>
+    <items x="249" y="0" width="125" height="36" text="List of Expenses"/>
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Chart" id="46" x="1309" y="331" measuredWidth="200" measuredHeight="200"/>
+  <widgets xsi:type="model:Master" id="47" x="1024" y="960" measuredWidth="872" measuredHeight="803">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Devices/Nexus%206.screen#Nexus%206%20Landscape"/>
+    <overrides>
+      <widgets ref="4" height="803"/>
+      <widgets ref="8" height="757"/>
+      <widgets ref="136" y="43" width="-1" height="43"/>
+      <widgets ref="137" height="43"/>
+      <widgets ref="138" y="12"/>
+      <widgets ref="139" y="12"/>
+      <widgets ref="140" y="12"/>
+      <widgets ref="141" y="12"/>
+      <widgets ref="142" y="8"/>
+      <widgets ref="98" height="757"/>
+      <widgets ref="99" height="757"/>
+      <widgets ref="100" y="232"/>
+      <widgets ref="102" y="357"/>
+      <widgets ref="104" y="482"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Window" id="48" x="1128" y="1064" width="641" height="665" text="Here are your results expense report Mapache!" measuredWidth="641" measuredHeight="665"/>
+  <widgets xsi:type="model:Button" id="50" x="1272" y="1680" text="Cancel" measuredWidth="64" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" id="52" x="1144" y="1100" width="609" height="573" text="List of Expenses (selected), Expense Report&#xD;&#xA;&#xD;&#xA;" measuredWidth="609" measuredHeight="573" selection="0">
+    <items x="10" y="0" width="194" height="36" text="List of Expenses (selected)"/>
+    <items x="204" y="0" width="124" height="36" text="Expense Report"/>
+    <items x="328" y="0" width="21" height="36"/>
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" id="54" x="1187" y="1168" width="383" height="281" text="Expense Name,Qty,(w:30). In/out,(align:center). Category, Actions&#xA;Peter,42,[x],{computer},[Edit] [View]&#xA;Henri,(bg:lightGreen).12,[],{train},[Edit] [View]&#xA;Olga,67,[x],{note},[Edit] [View]" measuredWidth="383" measuredHeight="281" alternative="#eee">
+    <font/>
+    <items x="303" y="32" width="26" height="20" text="Edit"/>
+    <items x="333" y="32" width="32" height="20" text="View"/>
+    <items x="303" y="60" width="26" height="20" text="Edit"/>
+    <items x="333" y="60" width="32" height="20" text="View"/>
+    <items x="303" y="88" width="26" height="20" text="Edit"/>
+    <items x="333" y="88" width="32" height="20" text="View"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="55" x="622" y="458" width="62" text="Category" measuredWidth="62" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:List" id="56" x="710" y="455" width="175" height="148" text="(o) Meals 1 (selected)&#xA;( ) Transport&#xA;( ) Entertainemt&#xA;( ) Others&#xA;" measuredWidth="175" measuredHeight="148" alpha="0">
+    <font/>
+    <items x="0" y="2" width="175" height="28" text="(o) Meals 1 (selected)"/>
+    <items x="0" y="30" width="175" height="28" text="( ) Transport"/>
+    <items x="0" y="58" width="175" height="28" text="( ) Entertainemt"/>
+    <items x="0" y="86" width="175" height="28" text="( ) Others"/>
+  </widgets>
+  <widgets xsi:type="model:Chart" id="57" x="1565" y="326" measuredWidth="200" measuredHeight="200"/>
+  <widgets xsi:type="model:Label" id="58" x="1357" y="291" width="104" text="Income" measuredWidth="104" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="59" x="1613" y="296" width="104" text="Spending" measuredWidth="104" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="60" x="630" y="618" text="Date" measuredWidth="38" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:DateField" id="61" x="710" y="618" width="175" text="  /  /  " measuredWidth="175" measuredHeight="28"/>
+  <widgets xsi:type="model:Button" id="62" x="1226" y="750" text="ExportExpenses" measuredWidth="123" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="63" x="1150" y="1680" text="ExportExpenses" measuredWidth="123" measuredHeight="30">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="64" x="1253" y="232" width="62" text="Monthly" measuredWidth="62" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="65" x="93" y="400" text="Folder" measuredWidth="48" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" id="66" x="188" y="395" width="175" text="/path/to/folder" measuredWidth="175" measuredHeight="28">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Alert" id="67" x="174" y="584" text="Alert&#xA;This is an alert message&#xA;OK,Cancel" measuredWidth="244" measuredHeight="142" icon="warning (large)">
+    <items x="54" y="98" width="80" height="29" text="OK"/>
+    <items x="149" y="98" width="80" height="29" text="Cancel"/>
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font name="Roboto" size="14px"/>
+</model:Screen>
