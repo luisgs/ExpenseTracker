@@ -48,11 +48,14 @@ def main(argv):
     while True:
         button, values = window.Read()
         print(button)
-        if button == "Submit":
-            sg.popup("Submit layaout 1?")
-        elif (button == 'Cancel') or (button == 'None'):
+        if button == "submitTab1":
+            sg.popup("Submit layaout 1")
+        elif button == "submitTab2":
+            sg.popup("Submit layaout 2")
+        elif button == "submitTab3":
+            sg.popup("Submit layaout 3")
+        else:
             break
-
     window.close()
     exit()
 
