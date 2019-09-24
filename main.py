@@ -9,7 +9,7 @@ layout = [
           [sg.Text('Name', size=(15, 1)), sg.InputText('name')],
           [sg.Text('Email', size=(15, 1)), sg.InputText('email@address.com')],
           [sg.Text('Password', size=(15, 1)), sg.InputText('Password', password_char='*')],
-          [sg.Text('Expense File location:', size=(15, 1)), sg.InputText('C:\\Users\\gomezlui\\Downloads\\ExpenseReport.json')],
+          [sg.Text('Expense File location:', size=(15, 1)), sg.InputText('C:\\Users\\gomezlui\\Documents\\Personal\\PythonPersonalProjects\\ExpenseTracker\\json\\example.json')],
           [sg.OK(tooltip='Click to submit this window'), sg.Cancel()]
          ]
 
