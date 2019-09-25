@@ -55,6 +55,17 @@ layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
             sg.Tab('Expense Report', tab2_layout),
             sg.Tab('List of Expenses', tab3_layout)]])]]
 
+#
+# valuesOfTab
+# IN: We receive a tab preffix (string) and a dict of values (entries)
+# OUT: We return ONLY a dict with key?values for this particular tab
+def valuesOfTab(tab, allValues):
+    res = {key:val for key, val in allValues.items()
+            if key.startswith(tab)}
+    logging.debug("HERE ARE VALUES FOR "+tab)
+    logging.debug(res)
+    return res
+
 def main(argv):
     # We bring global variables
     global username
@@ -70,20 +81,25 @@ def main(argv):
 
     while True:
         button, values = window.Read()
-        logging.debug(button)
-        logging.debug(values)
+        # logging.debug(button)
+        # logging.debug(values)
         #
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
         if (button == T1_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 1")
             newExpense = {}
-            logging.debug(values)
             #expenseJSONFile.writeExpense(filename, data, expense):
+            # we get ONLY values of this tab1
+            res = valuesOfTab(T1_KEY, values)
         elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 2")
+            # we get ONLY values of this tab2
+            res = valuesOfTab(T2_KEY, values)
         elif (button == T3_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 3")
+            # we get ONLY values of this tab3
+            res = valuesOfTab(T3_KEY, values)
         elif ('_CANCEL_' in button ) or (button is None):
             # Cancel button is pressed
             logging.debug("Cancel button has been pressed!")
