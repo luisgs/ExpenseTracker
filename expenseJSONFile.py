@@ -53,6 +53,8 @@ def formatExpense(newExpense):
                 formattedExpense["frequency"] = conversionDict[key]
             else:
                 continue
+        elif ("_QTY" in key):
+            formattedExpense[conversionDict[key]] = int(value)
         else:
             formattedExpense[conversionDict[key]] = value
     return formattedExpense

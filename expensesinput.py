@@ -29,7 +29,7 @@ categories = [[sg.Radio('Loging', "CAT", default=True, key=T1_KEY+"_CAT0_Loging"
 tab1_layout =  [
           [sg.Text('Expense Name', size=(15, 1)),
             sg.InputText('Expense Name', key=T1_KEY+'_EXPENSENAME_')],
-          [sg.Text('Quantity', size=(15, 1)), sg.InputText('$?', key=T1_KEY+'_QTY_')],
+          [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=T1_KEY+'_QTY_')],
           [sg.Text('Frequency', size=(15, 1)),
             sg.Radio('Monthly', "FREQ", key=T1_KEY+"_FREQ0_Monthly", default=True),
             sg.Radio('Yearly', "FREQ", key=T1_KEY+"_FREQ1_Yearly")],
