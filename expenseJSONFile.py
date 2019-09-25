@@ -37,7 +37,7 @@ def writeExpense(filename, expense):
     data['expensesList'].append(newExpense)
     try:
         with open(filename, 'w') as json_file:
-            json.dump(data, json_file)
+            json.dump(data, json_file, indent=4, sort_keys=True)
         return True
     except:
         logging.error("Writting New Expense into file has failed!")
