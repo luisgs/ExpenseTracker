@@ -1,4 +1,5 @@
 import json, sys
+import hashlib
 import datetime
 import logging
 
@@ -35,6 +36,14 @@ def readJSON(filepath):
         #logging.debug(len(data['expensesList']))
     return data
 
+#
+# userAndPassCorrect
+# return True if both password and user are mathcing with our file
+def userAndPassCorrect(user, password, JSONname, JSONpass):
+    return ((name == JSONname) and
+        ((hashlib.md5(password.encode('utf-8')).hexdigest())==JSONpass))
+    # Function that hash our password
+    # hashlib.md5(password.encode('utf-8')).hexdigest()
 #
 # formatExpense
 # formatting a new expense dict into our JSON key values dict

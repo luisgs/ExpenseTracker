@@ -9,6 +9,8 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 # Default global variables
 #
 username = "Default"
+email = "email@email.com"
+password = "81dc9bdb52d04dc20036dbd8313ed055"
 filename = "/tmp/deleteme.txt"
 # Tabs preffix keys to differenciate submnittted values.
 T1_KEY = 'TAB_1'
@@ -70,12 +72,21 @@ def valuesOfTab(tab, allValues):
 def main(argv):
     # We bring global variables
     global username
+    global email
+    global password
     global filename
     username = argv[0]
+    email = argv[1]
+    password = argv[2]
     filename = argv[3]
 
     # call external function to read our file
     data = expenseJSONFile.readJSON(filename)
+
+    # email and password is correct?
+    if not (expenseJSONFile.userAndPassCorrect(data["email"],date["password"], username, password)):
+        sg.popup("USER AND/OR DO NOT MATCH!!!")
+        exit()
 
     # send our window.layout out and wait for values
     window = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
@@ -84,7 +95,7 @@ def main(argv):
         button, values = window.Read()
         # logging.debug(button)
         # logging.debug(values)
-        #
+
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
         if (button == T1_KEY+'_SUBMIT_'):
