@@ -39,8 +39,13 @@ def readJSON(filepath):
 #
 # userAndPassCorrect
 # return True if both password and user are mathcing with our file
-def userAndPassCorrect(user, password, JSONname, JSONpass):
-    return ((name == JSONname) and
+def userAndPassCorrect(email, password, JSONemail, JSONpass):
+    logging.debug(email)
+    logging.debug(password)
+    logging.debug(JSONemail)
+    logging.debug(hashlib.md5(password.encode('utf-8')).hexdigest())
+    logging.debug(JSONpass)
+    return ((email == JSONemail) and
         ((hashlib.md5(password.encode('utf-8')).hexdigest())==JSONpass))
     # Function that hash our password
     # hashlib.md5(password.encode('utf-8')).hexdigest()

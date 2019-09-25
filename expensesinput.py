@@ -84,9 +84,11 @@ def main(argv):
     data = expenseJSONFile.readJSON(filename)
 
     # email and password is correct?
-    if not (expenseJSONFile.userAndPassCorrect(data["email"],date["password"], username, password)):
+    if not (expenseJSONFile.userAndPassCorrect(email, password, data["email"],data["password"])):
         sg.popup("USER AND/OR DO NOT MATCH!!!")
         exit()
+    else:
+        sg.popup("USER AND PASSWORD are MATCHING!")
 
     # send our window.layout out and wait for values
     window = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
