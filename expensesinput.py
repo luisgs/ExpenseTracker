@@ -1,6 +1,7 @@
 import sys
 import logging
 import PySimpleGUI as sg
+import datetime
 import expenseJSONFile
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
@@ -33,7 +34,7 @@ tab1_layout =  [
             sg.Radio('Monthly', "FREQ", key=T1_KEY+"_FREQ0_Monthly", default=True),
             sg.Radio('Yearly', "FREQ", key=T1_KEY+"_FREQ1_Yearly")],
           [sg.Frame("Categories", [[sg.Column(categories)]])],
-          [sg.Text('Date', size=(15, 1)), sg.InputText('../../..', key=T1_KEY+'_DATE_')],
+          [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=T1_KEY+'_DATE_')],
           [sg.Text('Income/Outcome', size=(15, 1)),
             sg.Checkbox('Expense?', size=(10,1), default=True, key=T1_KEY+"_EXPENSE_")],
           [sg.Submit(key=T1_KEY+'_SUBMIT_'), sg.Cancel(key=T1_KEY+'_CANCEL_')]
