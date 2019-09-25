@@ -1,5 +1,7 @@
-import json
+import json, sys
+import logging
 
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
 # Library for reading our JSON file
 #
@@ -10,10 +12,10 @@ def readJSON(filepath):
     # parse file
     with open(filepath) as json_file:
         data = json.load(json_file)
-        print('Name: ' + data['name'])
+        logging.debug('Name: ' + data['name'])
         for expense in data['expensesList']:
-            print('ExpenseName: ' + expense['name'])
-        print(len(data['expensesList']))
+            logging.debug('ExpenseName: ' + expense['name'])
+        logging.debug(len(data['expensesList']))
     return data
 
 def writeExpense(filename, data, expense):
