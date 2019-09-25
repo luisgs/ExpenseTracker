@@ -17,10 +17,10 @@ T3_KEY = 'TAB_3'
 #
 # First tab layaout
 #
-categories = [[sg.Radio('Loging', "CAT", default=True, key=T1_KEY+"_CAT0_"),
-                sg.Radio('Transport', "CAT", key=T1_KEY+"_CAT1_"),
-                sg.Radio('Entertainemt', "CAT", key=T1_KEY+"_CAT2_"),
-                sg.Radio('Salary', "CAT", key=T1_KEY+"_CAT3_")]]
+categories = [[sg.Radio('Loging', "CAT", default=True, key=T1_KEY+"_CAT0_Loging"),
+                sg.Radio('Transport', "CAT", key=T1_KEY+"_CAT1_Transport"),
+                sg.Radio('Entertainemt', "CAT", key=T1_KEY+"_CAT2_Entertainment"),
+                sg.Radio('Salary', "CAT", key=T1_KEY+"_CAT3_Salary")]]
 #
 # CONTINUATION OF First tab layaout
 # ..we use T1_key for labeling our inputs
@@ -29,8 +29,8 @@ tab1_layout =  [
             sg.InputText('Expense Name', key=T1_KEY+'_EXPENSENAME_')],
           [sg.Text('Quantity', size=(15, 1)), sg.InputText('$?', key=T1_KEY+'_QTY_')],
           [sg.Text('Frequency', size=(15, 1)),
-            sg.Radio('Monthly', "FREQ", key=T1_KEY+"_FREQ0_", default=True),
-            sg.Radio('Yearly', "FREQ", key=T1_KEY+"_FREQ1_")],
+            sg.Radio('Monthly', "FREQ", key=T1_KEY+"_FREQ0_Monthly", default=True),
+            sg.Radio('Yearly', "FREQ", key=T1_KEY+"_FREQ1_Yearly")],
           [sg.Frame("Categories", [[sg.Column(categories)]])],
           [sg.Text('Date', size=(15, 1)), sg.InputText('../../..', key=T1_KEY+'_DATE_')],
           [sg.Text('Income/Outcome', size=(15, 1)),
@@ -89,7 +89,6 @@ def main(argv):
         # First tab
         if (button == T1_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 1")
-            newExpense = {}
             #expenseJSONFile.writeExpense(filename, data, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
