@@ -9,6 +9,7 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
 username = "Default"
 filename = "/tmp/deleteme.txt"
+# Tabs preffix keys to differenciate submnittted values.
 T1_KEY = 'TAB_1'
 T2_KEY = 'TAB_2'
 T3_KEY = 'TAB_3'
@@ -92,6 +93,7 @@ def main(argv):
             #expenseJSONFile.writeExpense(filename, data, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
+            expenseJSONFile.writeExpense(filename, res)
         elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 2")
             # we get ONLY values of this tab2
