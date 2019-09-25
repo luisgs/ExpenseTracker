@@ -1,4 +1,5 @@
 import json, sys
+import datetime
 import logging
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
@@ -67,6 +68,8 @@ def writeExpense(filename, expense):
     expenseID = len(data['expensesList'])
     # We sort out our expense input and formatted
     newExpense = formatExpense(expense)
+    # Update last time modified field
+    data["modified"] = str(datetime.datetime.now())
     # adding it to our NewExpense
     newExpense.update({'expenseID':expenseID})
     # Appending our new expense to our LIST of expenses (if any)

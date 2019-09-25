@@ -87,17 +87,17 @@ def main(argv):
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
         if (button == T1_KEY+'_SUBMIT_'):
-            sg.popup("Submit layaout 1")
+            sg.popup("Submit layout 1")
             #expenseJSONFile.writeExpense(filename, data, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
             expenseJSONFile.writeExpense(filename, res)
         elif (button == T2_KEY+'_SUBMIT_'):
-            sg.popup("Submit layaout 2")
+            sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
             res = valuesOfTab(T2_KEY, values)
         elif (button == T3_KEY+'_SUBMIT_'):
-            sg.popup("Submit layaout 3")
+            sg.popup("Submit layout 3")
             # we get ONLY values of this tab3
             res = valuesOfTab(T3_KEY, values)
         elif ('_CANCEL_' in button ) or (button is None):
