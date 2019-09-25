@@ -1,7 +1,9 @@
 import sys
+import logging
 import PySimpleGUI as sg
 import expenseJSONFile
 
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
 # Default global variables
 #
@@ -54,29 +56,40 @@ layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
             sg.Tab('List of Expenses', tab3_layout)]])]]
 
 def main(argv):
-    # print(argv)
+    # We bring global variables
     global username
     global filename
     username = argv[0]
     filename = argv[3]
 
-    data=expenseJSONFile.readJSON(filename)
+    # call external function to read our file
+    data = expenseJSONFile.readJSON(filename)
 
+    # send our window.layout out and wait for values
     window = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
 
     while True:
         button, values = window.Read()
-        print(button)
-        if button == "submitTab1":
+        logging.debug(button)
+        logging.debug(values)
+        #
+        # Depending on which SUBMIT (tab) is pressed, we act
+        # First tab
+        if (button == T1_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 1")
             newExpense = {}
-            print(values)
+            logging.debug(values)
             #expenseJSONFile.writeExpense(filename, data, expense):
-        elif button == "submitTab2":
+        elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 2")
-        elif button == "submitTab3":
+        elif (button == T3_KEY+'_SUBMIT_'):
             sg.popup("Submit layaout 3")
+        elif ('_CANCEL_' in button ) or (button is None):
+            # Cancel button is pressed
+            logging.debug("Cancel button has been pressed!")
+            break
         else:
+            logging.error("Button has not been captured right")
             break
     window.close()
     exit()
