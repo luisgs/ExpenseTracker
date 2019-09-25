@@ -42,7 +42,18 @@ def formatExpense(newExpense):
     global conversionDict
     formattedExpense={}
     for key,value in newExpense.items():
-        formattedExpense[conversionDict[key]] = value
+        if ("_CAT" in key):
+            if (value):
+                formattedExpense["category"] = conversionDict[key]
+            else:
+                continue
+        elif ("_FREQ" in key):
+            if (value):
+                formattedExpense["frequency"] = conversionDict[key]
+            else:
+                continue
+        else:
+            formattedExpense[conversionDict[key]] = value
     return formattedExpense
 
 # writeExpense
