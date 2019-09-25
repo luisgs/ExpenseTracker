@@ -18,8 +18,7 @@ conversionDict = {
     "TAB_1_EXPENSENAME_": "Expense Name",
     "TAB_1_FREQ0_Monthly": "Monthly",
     "TAB_1_FREQ1_Yearly": "Yearly",
-    "TAB_1_IN_": "income",
-    "TAB_1_OUT_": "outcome",
+    "TAB_1_EXPENSE_": "Expense?",
     "TAB_1_QTY_": "qty",
 }
 

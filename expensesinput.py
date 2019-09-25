@@ -21,6 +21,7 @@ categories = [[sg.Radio('Loging', "CAT", default=True, key=T1_KEY+"_CAT0_Loging"
                 sg.Radio('Transport', "CAT", key=T1_KEY+"_CAT1_Transport"),
                 sg.Radio('Entertainemt', "CAT", key=T1_KEY+"_CAT2_Entertainment"),
                 sg.Radio('Salary', "CAT", key=T1_KEY+"_CAT3_Salary")]]
+
 #
 # CONTINUATION OF First tab layaout
 # ..we use T1_key for labeling our inputs
@@ -34,8 +35,7 @@ tab1_layout =  [
           [sg.Frame("Categories", [[sg.Column(categories)]])],
           [sg.Text('Date', size=(15, 1)), sg.InputText('../../..', key=T1_KEY+'_DATE_')],
           [sg.Text('Income/Outcome', size=(15, 1)),
-            sg.Radio('Outcome', "INOUT", default=True, key=T1_KEY+'_IN_'),
-            sg.Radio('Income', "INOUT", key=T1_KEY+'_OUT_')],
+            sg.Checkbox('Expense?', size=(10,1), default=True, key=T1_KEY+"_EXPENSE_")],
           [sg.Submit(key=T1_KEY+'_SUBMIT_'), sg.Cancel(key=T1_KEY+'_CANCEL_')]
          ]
 
@@ -44,7 +44,6 @@ tab1_layout =  [
 # WE HAVE TO USE KEY TAB_2
 tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=T2_KEY+'_IN_')],
           [sg.Submit(key=T2_KEY+'_SUBMIT_'), sg.Cancel(key=T2_KEY+'_CANCEL_')]]
-
 
 #
 # Third tab layaout
