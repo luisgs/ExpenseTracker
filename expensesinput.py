@@ -115,7 +115,6 @@ def main(argv):
 
     while True:
         button, values = window.Read()
-        dictExpenses = values["expensesList"]
         # logging.debug(button)
         # logging.debug(values)
 
@@ -127,7 +126,6 @@ def main(argv):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
             newExpense = expenseJSONFile.writeExpense(filename, res)
-            dictExpenses.append(newExpense)
         elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
