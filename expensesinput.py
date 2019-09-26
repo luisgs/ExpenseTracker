@@ -12,6 +12,9 @@ username = "Default"
 email = "email@email.com"
 password = "81dc9bdb52d04dc20036dbd8313ed055"
 filename = "/tmp/deleteme.txt"
+
+dictExpenses = {}
+
 # Tabs preffix keys to differenciate submnittted values.
 T1_KEY = 'TAB_1'
 T2_KEY = 'TAB_2'
@@ -48,15 +51,26 @@ tab1_layout =  [
 #
 # Second tab layaout
 # WE HAVE TO USE KEY TAB_2
+#
 tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=T2_KEY+'_IN_')],
           [sg.Submit(key=T2_KEY+'_SUBMIT_'), sg.Cancel(key=T2_KEY+'_CANCEL_')]]
 
 #
 # Third tab layaout
 #
+headings = ['ID', 'Name', 'Quantity','Frequency', 'Category', 'Date', 'Expense?']  # the text of the headings
+header =  [[sg.Text('  ')] + [sg.Text(h, size=(14,1)) for h in headings]]  # build header layout
+input_rows = [[sg.Input(size=(15,1), pad=(0,0)) for col in range(4)] for row in range(10)]
+tab3_layout = header + input_rows
+
 tab3_layout = [[sg.T('This is inside tab 3')],
                       [sg.Submit(key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
 
+
+
+#
+# ALL TABS' LAYOUTs TOGETHER
+#
 layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
             sg.Tab('Expense Report', tab2_layout),
             sg.Tab('List of Expenses', tab3_layout)]])]]
@@ -66,6 +80,8 @@ layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
 # IN: We receive a tab preffix (string) and a dict of values (entries)
 # OUT: We return ONLY a dict with key?values for this particular tab
 def valuesOfTab(tab, allValues):
+    logging.debug(allValues)
+    logging.debug(tab)
     res = {key:val for key, val in allValues.items()
             if key.startswith(tab)}
     logging.debug("HERE ARE VALUES FOR "+tab)
@@ -78,6 +94,7 @@ def main(argv):
     global email
     global password
     global filename
+    global dictExpenses
     username = argv['_NAME_']
     email = argv['_EMAIL_']
     password = argv['_PASSWORD_']
@@ -98,6 +115,7 @@ def main(argv):
 
     while True:
         button, values = window.Read()
+        dictExpenses = values["expensesList"]
         # logging.debug(button)
         # logging.debug(values)
 
@@ -108,7 +126,8 @@ def main(argv):
             #expenseJSONFile.writeExpense(filename, data, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
-            expenseJSONFile.writeExpense(filename, res)
+            newExpense = expenseJSONFile.writeExpense(filename, res)
+            dictExpenses.append(newExpense)
         elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2

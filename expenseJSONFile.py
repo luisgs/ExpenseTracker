@@ -73,7 +73,7 @@ def formatExpense(newExpense):
 # writeExpense
 # IN: we receive an expense dict and filename filepath
 #       we append this new (already formatted) expense with the rest
-# OUT: True is all was good. False end other case
+# OUT: Return Expense (True) is all was good. False end other case
 def writeExpense(filename, expense):
     # We read it all again
     data = readJSON(filename)
@@ -91,7 +91,13 @@ def writeExpense(filename, expense):
         with open(filename, 'w') as json_file:
             json.dump(data, json_file, indent=4, sort_keys=True)
         json_file.close()
-        return True
+        return newExpense
     except:
         logging.error("Writting New Expense into file has failed!")
         return False
+
+#
+#
+#
+def returnDictExpense():
+    return True
