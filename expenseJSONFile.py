@@ -91,13 +91,7 @@ def writeExpense(filename, expense):
         with open(filename, 'w') as json_file:
             json.dump(data, json_file, indent=4, sort_keys=True)
         json_file.close()
-        return data['expensesList']
+        return True
     except:
         logging.error("Writting New Expense into file has failed!")
         return False
-
-#
-#
-#
-def returnDictExpense():
-    return True

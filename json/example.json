@@ -1,25 +1,98 @@
 {
-  "name":"Luis",
-  "email":"name@gmail.com",
-  "password":"336E3D863781A03FCAB25C8091066300",
-  "expensesList": [
-    {
-      "expenseID": 0,
-      "name": "Mortgage",
-      "qty": 10000,
-      "frequency": "Monthly",
-      "category": "loging",
-      "date": "1-1-1980",
-      "in": false
-    },
-    {
-      "expenseID": 1,
-      "name": "Salary",
-      "qty": 15000,
-      "frequency": "Monthly",
-      "category": "salary",
-      "date": "1-1-1980",
-      "in": true
-    }
-  ]
+    "email": "email@address.com",
+    "expensesList": [
+        {
+            "category": "loging",
+            "date": "1-1-1980",
+            "expenseID": 0,
+            "frequency": "Monthly",
+            "in": false,
+            "name": "Mortgage",
+            "qty": 10000
+        },
+        {
+            "category": "salary",
+            "date": "1-1-1980",
+            "expenseID": 1,
+            "frequency": "Monthly",
+            "in": true,
+            "name": "Salary",
+            "qty": 15000
+        },
+        {
+            "Expense Name": "Expense Name",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 2,
+            "frequency": "Monthly",
+            "qty": 100
+        },
+        {
+            "Expense Name": "Expense Name",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 3,
+            "frequency": "Monthly",
+            "qty": 100
+        },
+        {
+            "Expense Name": "Expense Name",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 4,
+            "frequency": "Monthly",
+            "qty": 100
+        },
+        {
+            "Expense Name": "Expense Name",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 5,
+            "frequency": "Monthly",
+            "qty": 100
+        },
+        {
+            "Expense Name": "Expense Name",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 6,
+            "frequency": "Monthly",
+            "qty": 100
+        },
+        {
+            "Expense Name": "Expense Name",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 7,
+            "frequency": "Monthly",
+            "qty": 100
+        },
+        {
+            "Expense Name": "Expense Name",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 8,
+            "frequency": "Monthly",
+            "qty": 100
+        },
+        {
+            "Expense Name": "adasdasd!!!",
+            "Expense?": true,
+            "category": "loging",
+            "date": "2019-09-26",
+            "expenseID": 9,
+            "frequency": "Monthly",
+            "qty": 100
+        }
+    ],
+    "modified": "2019-09-26 14:20:25.190792",
+    "name": "name",
+    "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }
