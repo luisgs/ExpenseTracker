@@ -6,20 +6,21 @@ import logging
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
 # Library for reading our JSON file
+# We include all necessary functions and operation for that in here
 #
 
 #
 # Global variables
 #
 conversionDict = {
-    "TAB_1_CAT0_Loging": "loging",
-    "TAB_1_CAT1_Transport": "Transport",
-    "TAB_1_CAT2_Entertainment": "Entertainment",
-    "TAB_1_CAT3_Salary": "salary",
+    "TAB_1_CAT_Loging": "loging",
+    "TAB_1_CAT_Transport": "Transport",
+    "TAB_1_CAT_Entertainment": "Entertainment",
+    "TAB_1_CAT_Salary": "salary",
     "TAB_1_DATE_": "date",
     "TAB_1_EXPENSENAME_": "Expense Name",
-    "TAB_1_FREQ0_Monthly": "Monthly",
-    "TAB_1_FREQ1_Yearly": "Yearly",
+    "TAB_1_FREQ_Monthly": "Monthly",
+    "TAB_1_FREQ_Yearly": "Yearly",
     "TAB_1_EXPENSE_": "Expense?",
     "TAB_1_QTY_": "qty",
 }
@@ -34,6 +35,7 @@ def readJSON(filepath):
         #for expense in data['expensesList']:
         #    logging.debug('ExpenseName: ' + expense['name'])
         #logging.debug(len(data['expensesList']))
+    json_file.close()
     return data
 
 #
@@ -52,17 +54,17 @@ def formatExpense(newExpense):
     global conversionDict
     formattedExpense={}
     for key,value in newExpense.items():
-        if ("_CAT" in key):
+        if ("_CAT_" in key):
             if (value):
                 formattedExpense["category"] = conversionDict[key]
             else:
                 continue
-        elif ("_FREQ" in key):
+        elif ("_FREQ_" in key):
             if (value):
                 formattedExpense["frequency"] = conversionDict[key]
             else:
                 continue
-        elif ("_QTY" in key):
+        elif ("_QTY_" in key):
             formattedExpense[conversionDict[key]] = int(value)
         else:
             formattedExpense[conversionDict[key]] = value
@@ -88,10 +90,8 @@ def writeExpense(filename, expense):
     try:
         with open(filename, 'w') as json_file:
             json.dump(data, json_file, indent=4, sort_keys=True)
+        json_file.close()
         return True
     except:
         logging.error("Writting New Expense into file has failed!")
         return False
-
-def passwordIsRight (file, password):
-    return True

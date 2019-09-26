@@ -39,3 +39,4 @@ while True:
 
 window.close()
 print(button, values['_NAME_'], values['_EMAIL_'], values['_FILEPATH_'])
+exit()
