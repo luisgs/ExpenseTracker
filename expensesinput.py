@@ -17,13 +17,16 @@ T1_KEY = 'TAB_1'
 T2_KEY = 'TAB_2'
 T3_KEY = 'TAB_3'
 
+CAT = "_CAT_"
+FREQ = "_FREQ_"
+
 #
 # First tab layaout
 #
-categories = [[sg.Radio('Loging', "CAT", default=True, key=T1_KEY+"_CAT0_Loging"),
-                sg.Radio('Transport', "CAT", key=T1_KEY+"_CAT1_Transport"),
-                sg.Radio('Entertainemt', "CAT", key=T1_KEY+"_CAT2_Entertainment"),
-                sg.Radio('Salary', "CAT", key=T1_KEY+"_CAT3_Salary")]]
+categories = [[sg.Radio('Loging', "CAT", default=True, key=T1_KEY+CAT+"Loging"),
+                sg.Radio('Transport', "CAT", key=T1_KEY+CAT+"Transport"),
+                sg.Radio('Entertainemt', "CAT", key=T1_KEY+CAT+"Entertainment"),
+                sg.Radio('Salary', "CAT", key=T1_KEY+CAT+"Salary")]]
 
 #
 # CONTINUATION OF First tab layaout
@@ -33,8 +36,8 @@ tab1_layout =  [
             sg.InputText('Expense Name', key=T1_KEY+'_EXPENSENAME_')],
           [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=T1_KEY+'_QTY_')],
           [sg.Text('Frequency', size=(15, 1)),
-            sg.Radio('Monthly', "FREQ", key=T1_KEY+"_FREQ0_Monthly", default=True),
-            sg.Radio('Yearly', "FREQ", key=T1_KEY+"_FREQ1_Yearly")],
+            sg.Radio('Monthly', "FREQ", key=T1_KEY+FREQ+"Monthly", default=True),
+            sg.Radio('Yearly', "FREQ", key=T1_KEY+FREQ+"Yearly")],
           [sg.Frame("Categories", [[sg.Column(categories)]])],
           [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=T1_KEY+'_DATE_')],
           [sg.Text('Income/Outcome', size=(15, 1)),
@@ -75,10 +78,10 @@ def main(argv):
     global email
     global password
     global filename
-    username = argv[0]
-    email = argv[1]
-    password = argv[2]
-    filename = argv[3]
+    username = argv['_NAME_']
+    email = argv['_EMAIL_']
+    password = argv['_PASSWORD_']
+    filename = argv['_FILEPATH_']
 
     # call external function to read our file
     data = expenseJSONFile.readJSON(filename)
