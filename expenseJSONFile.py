@@ -75,7 +75,6 @@ def formatExpense(newExpense):
 #       we append this new (already formatted) expense with the rest
 # OUT: Return Expense (True) is all was good. False end other case
 def writeExpense(filename, expense):
-    global dictExpenses
     # We read it all again
     data = readJSON(filename)
     # Create new ID for our new expense based on length
@@ -92,8 +91,7 @@ def writeExpense(filename, expense):
         with open(filename, 'w') as json_file:
             json.dump(data, json_file, indent=4, sort_keys=True)
         json_file.close()
-        dictExpenses = data['expensesList']
-        return True
+        return data['expensesList']
     except:
         logging.error("Writting New Expense into file has failed!")
         return False

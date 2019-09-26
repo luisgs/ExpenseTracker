@@ -125,7 +125,7 @@ def main(argv):
             #expenseJSONFile.writeExpense(filename, data, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
-            newExpense = expenseJSONFile.writeExpense(filename, res)
+            dictExpenses = expenseJSONFile.writeExpense(filename, res)
         elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
