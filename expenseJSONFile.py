@@ -87,6 +87,7 @@ def writeExpense(filename, expense):
     newExpense.update({'expenseID':expenseID})
     # Appending our new expense to our LIST of expenses (if any)
     data['expensesList'].append(newExpense)
+    logging.debug(data['expensesList'])
     try:
         with open(filename, 'w') as json_file:
             json.dump(data, json_file, indent=4, sort_keys=True)

@@ -59,14 +59,35 @@ tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=T2_KEY+'_IN_')],
 # Third tab layaout
 #
 headings = ['ID', 'Name', 'Quantity','Frequency', 'Category', 'Date', 'Expense?']  # the text of the headings
+
 header =  [[sg.Text('  ')] + [sg.Text(h, size=(14,1)) for h in headings]]  # build header layout
 input_rows = [[sg.Input(size=(15,1), pad=(0,0)) for col in range(4)] for row in range(10)]
 tab3_layout = header + input_rows
 
 tab3_layout = [[sg.T('This is inside tab 3')],
-                      [sg.Submit(key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
+                      [sg.Submit('Refresh', key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
 
+# printMatrixExpenses
+# We need to generate expense matrix for the first time
+def printMatrixExpenses():
+    global dictExpenses
+    global tab3_layout
 
+    dictExpenses = expenseJSONFile.readJSON(filename)['expensesList']
+    if dictExpenses:
+        # dictExpenses[0] will be our list of taable heads
+        #header =  [[sg.Text('  ')] + [sg.Text(h, size=(14,1)) for h in dictExpenses[0]]]  # build header layout
+        #input_rows = [[sg.Input(size=(15,1), pad=(0,0)) for col in range(len(dictExpenses[0]))] for row in range(dictExpenses)]
+        #tab3_layout = header + input_rows
+        header =  [[sg.Text('  ')] + [sg.Text(k, size=(14,1)) for k, v in dictExpenses[0].items()]]  # build header layout
+        logging.debug(header)
+        tab3_layout = [[sg.T('This is inside tab 3')], header,
+                              [sg.Submit(key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
+        return header
+    else:
+        tab3_layout = [[sg.T('This is inside tab 3')], sg.Text("THERE IS NO EXPENSES HERE"),
+                              [sg.Submit(key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
+        logging.debug("NO EXPENSES")
 
 #
 # ALL TABS' LAYOUTs TOGETHER
@@ -80,13 +101,14 @@ layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
 # IN: We receive a tab preffix (string) and a dict of values (entries)
 # OUT: We return ONLY a dict with key?values for this particular tab
 def valuesOfTab(tab, allValues):
-    logging.debug(allValues)
-    logging.debug(tab)
+    #logging.debug(allValues)
+    #logging.debug(tab)
     res = {key:val for key, val in allValues.items()
             if key.startswith(tab)}
-    logging.debug("HERE ARE VALUES FOR "+tab)
-    logging.debug(res)
+    #logging.debug("HERE ARE VALUES FOR "+tab)
+    #logging.debug(res)
     return res
+
 
 def main(argv):
     # We bring global variables
@@ -95,6 +117,7 @@ def main(argv):
     global password
     global filename
     global dictExpenses
+    global layout
     username = argv['_NAME_']
     email = argv['_EMAIL_']
     password = argv['_PASSWORD_']
@@ -117,7 +140,7 @@ def main(argv):
         button, values = window.Read()
         # logging.debug(button)
         # logging.debug(values)
-
+        dictExpenses = expenseJSONFile.readJSON(filename)['expensesList']
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
         if (button == T1_KEY+'_SUBMIT_'):
@@ -125,7 +148,8 @@ def main(argv):
             #expenseJSONFile.writeExpense(filename, data, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
-            dictExpenses = expenseJSONFile.writeExpense(filename, res)
+            # We write OUR new Expense and RETURN all EXPENSE we have
+            expenseJSONFile.writeExpense(filename, res)
         elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
@@ -134,6 +158,11 @@ def main(argv):
             sg.popup("Submit layout 3")
             # we get ONLY values of this tab3
             res = valuesOfTab(T3_KEY, values)
+            printMatrixExpenses()
+            # window1 = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
+            # window.close()
+            #window.Refresh()
+            # window = window1
         elif ('_CANCEL_' in button ) or (button is None):
             # Cancel button is pressed
             logging.debug("Cancel button has been pressed!")
