@@ -2,8 +2,10 @@ import os.path
 import PySimpleGUI as sg
 import expensesinput
 
-# Very basic window.  Return values as a list
+# variables
+defaultFilePath = 'C:\\Users\\gomezlui\\Documents\\Personal\\PythonPersonalProjects\\ExpenseTracker\\json\\example.json'
 
+# Layout at first
 layout = [
           [sg.Text('Please enter your information:')],
           [sg.Text('Name', size=(15, 1)),
@@ -13,7 +15,8 @@ layout = [
           [sg.Text('Password', size=(15, 1)),
             sg.InputText('1234', password_char='*', key='_PASSWORD_')],
           [sg.Text('Expense File location:', size=(15, 1)),
-            sg.InputText('C:\\Users\\gomezlui\\Documents\\Personal\\PythonPersonalProjects\\ExpenseTracker\\json\\example.json', key='_FILEPATH_')],
+            #sg.InputText('C:\\Users\\gomezlui\\Documents\\Personal\\PythonPersonalProjects\\ExpenseTracker\\json\\example.json', key='_FILEPATH_')],
+            sg.In(defaultFilePath, key='_FILEPATH_'), sg.FileBrowse()],
           [sg.OK(tooltip='Click to submit this window'), sg.Cancel()]
          ]
 
