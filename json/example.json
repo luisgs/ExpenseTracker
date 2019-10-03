@@ -20,19 +20,19 @@
             "qty": 15000
         },
         {
-            "Expense Name": "Expense Name",
+            "Expense Name": "Expense Name123",
             "Expense?": true,
             "category": "loging",
-            "date": "2019-09-26",
+            "date": "2019-10-03",
             "expenseID": 2,
             "frequency": "Monthly",
             "qty": 100
         },
         {
-            "Expense Name": "Expense Name",
+            "Expense Name": "Expense Name59",
             "Expense?": true,
             "category": "loging",
-            "date": "2019-09-26",
+            "date": "2019-10-03",
             "expenseID": 3,
             "frequency": "Monthly",
             "qty": 100
@@ -41,7 +41,7 @@
             "Expense Name": "Expense Name",
             "Expense?": true,
             "category": "loging",
-            "date": "2019-09-26",
+            "date": "2019-10-03",
             "expenseID": 4,
             "frequency": "Monthly",
             "qty": 100
@@ -50,7 +50,7 @@
             "Expense Name": "Expense Name",
             "Expense?": true,
             "category": "loging",
-            "date": "2019-09-26",
+            "date": "2019-10-03",
             "expenseID": 5,
             "frequency": "Monthly",
             "qty": 100
@@ -59,40 +59,13 @@
             "Expense Name": "Expense Name",
             "Expense?": true,
             "category": "loging",
-            "date": "2019-09-26",
+            "date": "2019-10-03",
             "expenseID": 6,
-            "frequency": "Monthly",
-            "qty": 100
-        },
-        {
-            "Expense Name": "Expense Name",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-09-26",
-            "expenseID": 7,
-            "frequency": "Monthly",
-            "qty": 100
-        },
-        {
-            "Expense Name": "Expense Name",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-09-26",
-            "expenseID": 8,
-            "frequency": "Monthly",
-            "qty": 100
-        },
-        {
-            "Expense Name": "adasdasd!!!",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-09-26",
-            "expenseID": 9,
             "frequency": "Monthly",
             "qty": 100
         }
     ],
-    "modified": "2019-09-26 14:20:25.190792",
+    "modified": "2019-10-03 11:46:21.657681",
     "name": "name",
     "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }
