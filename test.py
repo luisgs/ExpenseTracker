@@ -46,6 +46,7 @@ def printMatrixExpenses():
         + [sg.Text(value, key=key+"_"+str(i), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
         tab3_layout = tab3_layout + row
 
+    tab3_layout = tab3_layout + [[sg.Submit(key='_REFRESH_')]]
     # tab3_layout = header + input_rows
     layout = [[sg.TabGroup([[sg.Tab('Tab 1', tab1_layout),
                 sg.Tab('Tab 3', tab3_layout)]])],
