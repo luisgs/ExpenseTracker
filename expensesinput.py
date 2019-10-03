@@ -26,10 +26,11 @@ FREQ = "_FREQ_"
 #
 # First tab layaout
 #
-categories = [[sg.Radio('Loging', "CAT", default=True, key=T1_KEY+CAT+"Loging"),
-                sg.Radio('Transport', "CAT", key=T1_KEY+CAT+"Transport"),
-                sg.Radio('Entertainemt', "CAT", key=T1_KEY+CAT+"Entertainment"),
-                sg.Radio('Salary', "CAT", key=T1_KEY+CAT+"Salary")]]
+dictOfCategories = {'lodging': "Lodging",
+                    'transport': "Transport",
+                    'entertainemt': "Entertainemt",
+                    'salary': "Salary"}
+categories = [[sg.Radio(value, "CAT", key=T1_KEY+CAT+key)] for key, value in dictOfCategories.items()]
 
 #
 # CONTINUATION OF First tab layaout
@@ -151,7 +152,6 @@ def main(argv):
     else:
         sg.popup("USER AND PASSWORD are MATCHING!")
 
-    printMatrixExpenses()
     # send our window.layout out and wait for values
     window = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
 
