@@ -67,27 +67,10 @@ tab3_layout = header + input_rows
 tab3_layout = [[sg.T('This is inside tab 3')],
                       [sg.Submit('Refresh', key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
 
-# printMatrixExpenses
-# We need to generate expense matrix for the first time
-def printMatrixExpenses():
-    global dictExpenses
-    global tab3_layout
-
-    dictExpenses = expenseJSONFile.readJSON(filename)['expensesList']
-    if dictExpenses:
-        # dictExpenses[0] will be our list of taable heads
-        #header =  [[sg.Text('  ')] + [sg.Text(h, size=(14,1)) for h in dictExpenses[0]]]  # build header layout
-        #input_rows = [[sg.Input(size=(15,1), pad=(0,0)) for col in range(len(dictExpenses[0]))] for row in range(dictExpenses)]
-        #tab3_layout = header + input_rows
-        header =  [[sg.Text('  ')] + [sg.Text(k, size=(14,1)) for k, v in dictExpenses[0].items()]]  # build header layout
-        logging.debug(header)
-        tab3_layout = [[sg.T('This is inside tab 3')], header,
-                              [sg.Submit(key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
-        return header
-    else:
-        tab3_layout = [[sg.T('This is inside tab 3')], sg.Text("THERE IS NO EXPENSES HERE"),
-                              [sg.Submit(key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
-        logging.debug("NO EXPENSES")
+# Unmodificable values
+inmutableList = ['expenseID', 'frequency', 'category', 'date', 'Expense?']
+# Writable values
+writableList = ['Expense Name', 'qty']
 
 #
 # ALL TABS' LAYOUTs TOGETHER
@@ -95,6 +78,44 @@ def printMatrixExpenses():
 layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
             sg.Tab('Expense Report', tab2_layout),
             sg.Tab('List of Expenses', tab3_layout)]])]]
+
+window = None
+
+# printMatrixExpenses
+# We need to generate expense matrix for the first time
+def printMatrixExpenses():
+    global dictExpenses
+    global tab1_layout, tab2_layout, tab3_layout, layout
+    global window
+    global header, button, values, T3_KEY
+    global writableList, inmutableList
+
+    dictExpenses = expenseJSONFile.readJSON(filename)['expensesList']
+
+    header = [[sg.Text('  ')] + [sg.Text(key, size=(15,1)) for key, value in dictExpenses[0].items() if key in writableList]
+                + [sg.Text(key, size=(15,1)) for key, value in dictExpenses[0].items() if key in inmutableList]]   # build header layout
+
+    matrix = header
+    #for i in range(len(dictExpenses)):
+    #    row = [[sg.Text('  ')] + [sg.InputText(value, key=key+"_"+str(i), size=(14,1)) for key, value in dictExpenses[i].items()]]
+    #    tab3_layout = tab3_layout + row
+
+    for i in range(len(dictExpenses)):
+        row = [[sg.Text('  ')] + [sg.InputText(value, key=key+"_"+str(i), size=(15,1)) for key, value in dictExpenses[i].items() if key in writableList]
+                + [sg.Text(value, key=key+"_"+str(i), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
+        matrix = matrix + row
+
+    tab3_layout = matrix + [[sg.Submit('Refresh', key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
+
+    # tab3_layout = header + input_rows
+    layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
+                sg.Tab('Expense Report', tab2_layout),
+                sg.Tab('List of Expenses', tab3_layout)]])]]
+
+    windowNew = sg.Window('NEW WINDOWS!!').Layout(layout)
+    window.close()
+    #button, values = windowNew.Read()
+    window = windowNew
 
 #
 # valuesOfTab
@@ -109,15 +130,11 @@ def valuesOfTab(tab, allValues):
     #logging.debug(res)
     return res
 
-
 def main(argv):
     # We bring global variables
-    global username
-    global email
-    global password
-    global filename
+    global username, email, password, filename
     global dictExpenses
-    global layout
+    global layout, window
     username = argv['_NAME_']
     email = argv['_EMAIL_']
     password = argv['_PASSWORD_']
