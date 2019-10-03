@@ -6,7 +6,7 @@
   "expensesList": [
     {
       "expenseID": 0,
-      "name": "Mortgage",
+      "Expense Name": "Mortgage",
       "qty": 10000,
       "frequency": "Monthly",
       "category": "loging",
@@ -15,7 +15,7 @@
     },
     {
       "expenseID": 1,
-      "name": "Salary",
+      "Expense Name": "Salary",
       "qty": 15000,
       "frequency": "Monthly",
       "category": "salary",

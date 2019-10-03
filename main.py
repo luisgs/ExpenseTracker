@@ -1,5 +1,5 @@
+import sys, logging
 import os.path
-import logging
 import PySimpleGUI as sg
 import expensesinput
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)

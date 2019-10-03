@@ -68,7 +68,8 @@ tab3_layout = [[sg.T('This is inside tab 3')],
                       [sg.Submit('Refresh', key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
 
 # Unmodificable values
-inmutableList = ['expenseID', 'frequency', 'category', 'date', 'Expense?']
+inmutableList = ['frequency', 'category', 'date']
+    # 'expenseID', 'Expense?'
 # Writable values
 writableList = ['Expense Name', 'qty']
 
@@ -81,8 +82,9 @@ layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
 
 window = None
 
+#
 # printMatrixExpenses
-# We need to generate expense matrix for the first time
+# We print tab3 with all our file expenses.
 def printMatrixExpenses():
     global dictExpenses
     global tab1_layout, tab2_layout, tab3_layout, layout
@@ -92,16 +94,15 @@ def printMatrixExpenses():
 
     dictExpenses = expenseJSONFile.readJSON(filename)['expensesList']
 
-    header = [[sg.Text('  ')] + [sg.Text(key, size=(15,1)) for key, value in dictExpenses[0].items() if key in writableList]
-                + [sg.Text(key, size=(15,1)) for key, value in dictExpenses[0].items() if key in inmutableList]]   # build header layout
+    header = [[sg.Text('  ')] + [sg.Text(key, size=(15,1)) for key in writableList]
+                + [sg.Text(key, size=(15,1)) for key in inmutableList]]   # build header layout
 
     matrix = header
-    #for i in range(len(dictExpenses)):
-    #    row = [[sg.Text('  ')] + [sg.InputText(value, key=key+"_"+str(i), size=(14,1)) for key, value in dictExpenses[i].items()]]
-    #    tab3_layout = tab3_layout + row
 
     for i in range(len(dictExpenses)):
-        row = [[sg.Text('  ')] + [sg.InputText(value, key=key+"_"+str(i), size=(15,1)) for key, value in dictExpenses[i].items() if key in writableList]
+        # current Expense in our dictionary
+        expense = dictExpenses[i]
+        row = [[sg.Text('  ')] + [sg.InputText(expense[writableList[elemKey]], key=writableList[elemKey]+"_"+str(i), size=(15,1)) for elemKey in range(len(writableList))]
                 + [sg.Text(value, key=key+"_"+str(i), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
         matrix = matrix + row
 
@@ -150,6 +151,7 @@ def main(argv):
     else:
         sg.popup("USER AND PASSWORD are MATCHING!")
 
+    printMatrixExpenses()
     # send our window.layout out and wait for values
     window = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
 

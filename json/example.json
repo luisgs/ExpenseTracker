@@ -1,71 +1,26 @@
 {
     "email": "email@address.com",
     "expensesList": [
-        {
-            "category": "loging",
-            "date": "1-1-1980",
-            "expenseID": 0,
-            "frequency": "Monthly",
-            "in": false,
-            "name": "Mortgage",
-            "qty": 10000
-        },
-        {
-            "category": "salary",
-            "date": "1-1-1980",
-            "expenseID": 1,
-            "frequency": "Monthly",
-            "in": true,
-            "name": "Salary",
-            "qty": 15000
-        },
-        {
-            "Expense Name": "Expense Name123",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-10-03",
-            "expenseID": 2,
-            "frequency": "Monthly",
-            "qty": 100
-        },
-        {
-            "Expense Name": "Expense Name59",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-10-03",
-            "expenseID": 3,
-            "frequency": "Monthly",
-            "qty": 100
-        },
-        {
-            "Expense Name": "Expense Name",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-10-03",
-            "expenseID": 4,
-            "frequency": "Monthly",
-            "qty": 100
-        },
-        {
-            "Expense Name": "Expense Name",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-10-03",
-            "expenseID": 5,
-            "frequency": "Monthly",
-            "qty": 100
-        },
-        {
-            "Expense Name": "Expense Name",
-            "Expense?": true,
-            "category": "loging",
-            "date": "2019-10-03",
-            "expenseID": 6,
-            "frequency": "Monthly",
-            "qty": 100
-        }
+      {
+        "expenseID": 0,
+        "Expense Name": "Mortgage",
+        "qty": 10000,
+        "frequency": "Monthly",
+        "category": "loging",
+        "date": "1-1-1980",
+        "in": false
+      },
+      {
+        "expenseID": 1,
+        "Expense Name": "Salary",
+        "qty": 15000,
+        "frequency": "Monthly",
+        "category": "salary",
+        "date": "1-1-1980",
+        "in": true
+      }
     ],
-    "modified": "2019-10-03 11:46:21.657681",
+    "modified": "2019-10-03 13:58:23.528906",
     "name": "name",
     "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }
