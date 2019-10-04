@@ -8,79 +8,54 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
 # Default global variables
 #
-#username = "Default"
-#email = "email@email.com"
-#password = "81dc9bdb52d04dc20036dbd8313ed055"
-#filepath = "/tmp/deleteme.txt"
-
 dictExpenses = {}
-
-# Tabs preffix keys to differenciate submnittted values.
-T1_KEY = 'TAB_1'
-T2_KEY = 'TAB_2'
-T3_KEY = 'TAB_3'
-
-CAT = "_CAT_"
-FREQ = "_FREQ_"
-
-#
-# JSON file definition
-#
-expenseID = "ID"
-expenseName = "name"
-qty = "qty"
-frequency = "frequency"
-category = "category"
-date = "date"
-income = "income"
-# Here is our definition of ONE EXPENSE in a list.
-expense = [expenseID, expenseName, qty, frequency, category, date, income]
 
 #
 # First tab layaout
 #
-dictOfCategories = {'lodging': "Lodging",
-                    'transport': "Transport",
-                    'entertainemt': "Entertainemt",
-                    'salary': "Salary",
-                    'other': "Others"}
-categories = [[sg.Radio(value, "CAT", key=T1_KEY+CAT+key)] for key, value in dictOfCategories.items()]
+# we generate RADIO button sectoin for all our possible categories
+#categories = [[sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key)]
+#                                        for key, value in variables.dictOfCategories.items()
+#                                        if key is not "other" else [sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key, Default=True)]]
+categories = [[sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key)]
+                if key is not "other" else [sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key, default=True)]
+                    for key, value in variables.dictOfCategories.items()]
 
 #
 # CONTINUATION OF First tab layaout
 # ..we use T1_key for labeling our inputs
 tab1_layout =  [
           [sg.Text('Expense Name', size=(15, 1)),
-            sg.InputText('Expense Name', key=T1_KEY+'_EXPENSENAME_')],
-          [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=T1_KEY+'_QTY_')],
+            sg.InputText('Expense Name', key=variables.T1_KEY+'_EXPENSENAME_')],
+          [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=variables.T1_KEY+'_QTY_')],
           [sg.Text('Frequency', size=(15, 1)),
-            sg.Radio('Monthly', "FREQ", key=T1_KEY+FREQ+"Monthly", default=True),
-            sg.Radio('Yearly', "FREQ", key=T1_KEY+FREQ+"Yearly")],
+            sg.Radio('Monthly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Monthly", default=True),
+            sg.Radio('Yearly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Yearly")],
           [sg.Frame("Categories", [[sg.Column(categories)]])],
-          [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=T1_KEY+'_DATE_')],
+          [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=variables.T1_KEY+'_DATE_')],
           [sg.Text('Income/Outcome', size=(15, 1)),
-            sg.Checkbox('Expense?', size=(10,1), default=True, key=T1_KEY+"_EXPENSE_")],
-          [sg.Submit(key=T1_KEY+'_SUBMIT_'), sg.Cancel(key=T1_KEY+'_CANCEL_')]
+            sg.Checkbox('Expense?', size=(10,1), default=True, key=variables.T1_KEY+"_EXPENSE_")],
+          [sg.Submit(key=variables.T1_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T1_KEY+'_CANCEL_')]
          ]
 
 #
 # Second tab layaout
 # WE HAVE TO USE KEY TAB_2
 #
-tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=T2_KEY+'_IN_')],
-          [sg.Submit(key=T2_KEY+'_SUBMIT_'), sg.Cancel(key=T2_KEY+'_CANCEL_')]]
+tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=variables.T2_KEY+'_IN_')],
+          [sg.Submit(key=variables.T2_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T2_KEY+'_CANCEL_')]]
 
 #
 # Third tab layaout
 #
 tab3_layout = [[sg.T('Please press refresh to update your values.')],
-                      [sg.Submit('Refresh', key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
+                      [sg.Submit('Refresh', key=variables.T3_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
 
 # Unmodificable values
-inmutableList = [frequency, category, date]
+inmutableList = [variables.frequency, variables.category, variables.date]
     # 'expenseID', 'Expense?'
 # Writable values
-writableList = [expenseName, qty]
+writableList = [variables.expenseName, variables.qty]
 
 #
 # ALL TABS' LAYOUTs TOGETHER
@@ -98,7 +73,7 @@ def printMatrixExpenses():
     global dictExpenses
     global tab1_layout, tab2_layout, tab3_layout, layout
     global window
-    global header, button, values, T3_KEY
+    global header, button, values
     global writableList, inmutableList
 
     dictExpenses = expenseJSONFile.readJSON(variables.filepath)['expensesList']
