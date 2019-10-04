@@ -53,6 +53,7 @@ dictOfCategories = {'lodging': "Lodging",
                     'transport': "Transport",
                     'entertainemt': "Entertainemt",
                     'salary': "Salary",
+                    'savings': "Savings",
                     'other': "Others"}
 #
 # Global variables
