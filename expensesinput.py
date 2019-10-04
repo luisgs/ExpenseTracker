@@ -13,10 +13,6 @@ dictExpenses = {}
 #
 # First tab layaout
 #
-# we generate RADIO button sectoin for all our possible categories
-#categories = [[sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key)]
-#                                        for key, value in variables.dictOfCategories.items()
-#                                        if key is not "other" else [sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key, Default=True)]]
 categories = [[sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key)]
                 if key is not "other" else [sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key, default=True)]
                     for key, value in variables.dictOfCategories.items()]
@@ -51,12 +47,6 @@ tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=variables.T2_KEY+'_IN_
 tab3_layout = [[sg.T('Please press refresh to update your values.')],
                       [sg.Submit('Refresh', key=variables.T3_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
 
-# Unmodificable values
-inmutableList = [variables.frequency, variables.category, variables.date]
-    # 'expenseID', 'Expense?'
-# Writable values
-writableList = [variables.expenseName, variables.qty]
-
 #
 # ALL TABS' LAYOUTs TOGETHER
 #
@@ -74,9 +64,14 @@ def printMatrixExpenses():
     global tab1_layout, tab2_layout, tab3_layout, layout
     global window
     global header, button, values
-    global writableList, inmutableList
 
-    dictExpenses = expenseJSONFile.readJSON(variables.filepath)['expensesList']
+    # Unmodificable values
+    inmutableList = [variables.frequency, variables.category, variables.date]
+        # 'expenseID', 'Expense?'
+    # Writable values
+    writableList = [variables.expenseName, variables.qty]
+
+    dictExpenses = variables.jsonData['expensesList']
 
     header = [[sg.Text('  ')] + [sg.Text(key, size=(15,1)) for key in writableList]
                 + [sg.Text(key, size=(15,1)) for key in inmutableList]]   # build header layout
@@ -97,7 +92,7 @@ def printMatrixExpenses():
                 sg.Tab('Expense Report', tab2_layout),
                 sg.Tab('List of Expenses', tab3_layout)]])]]
 
-    windowNew = sg.Window('ExpenseTracker has been refreshed!').Layout(layout)
+    windowNew = sg.Window('Hello {}!! Please, type in all your expenses'.format(variables.username)).Layout(layout)
     window.close()
     #button, values = windowNew.Read()
     window = windowNew
@@ -129,7 +124,7 @@ def main():
 
     # send our window.layout out and wait for values
     window = sg.Window('Hello {}!! Please, type in all your expenses'.format(variables.username)).Layout(layout)
-
+    printMatrixExpenses()
     while True:
         button, values = window.Read()
         dictExpenses = expenseJSONFile.readJSON(variables.filepath)['expensesList']

@@ -27,9 +27,18 @@
             "income": true,
             "name": "Expense Name",
             "qty": 100
+        },
+        {
+            "ID": 3,
+            "category": "Others",
+            "date": "2019-10-04",
+            "frequency": "Monthly",
+            "income": true,
+            "name": "123123",
+            "qty": 100
         }
     ],
-    "modified": "2019-10-04 16:43:50.542960",
+    "modified": "2019-10-04 17:03:56.194671",
     "name": "name",
     "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }
