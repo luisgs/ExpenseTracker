@@ -1,23 +1,21 @@
 import sys, logging
 import os.path
 import PySimpleGUI as sg
-import expensesinput
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+import expensesinput, variables
 
-# variables
-defaultFilePath = 'C:\\Users\\gomezlui\\Documents\\Personal\\PythonPersonalProjects\\ExpenseTracker\\json\\example.json'
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
 # Layout at first
 layout = [
           [sg.Text('Please enter your information:')],
           [sg.Text('Name', size=(15, 1)),
-            sg.InputText('name', key='_NAME_')],
+            sg.InputText(variables.username, key='_NAME_')],
           [sg.Text('Email', size=(15, 1)),
-            sg.InputText('email@address.com', key='_EMAIL_')],
+            sg.InputText(variables.email, key='_EMAIL_')],
           [sg.Text('Password', size=(15, 1)),
-            sg.InputText('1234', password_char='*', key='_PASSWORD_')],
+            sg.InputText(variables.clearPassword, password_char='*', key='_PASSWORD_')],
           [sg.Text('Expense File location:', size=(15, 1)),
-            sg.In(defaultFilePath, key='_FILEPATH_'), sg.FileBrowse()],
+            sg.In(variables.defaultFilePath, key='_FILEPATH_'), sg.FileBrowse()],
           [sg.OK(tooltip='Click to submit this window'), sg.Cancel()]
          ]
 
@@ -37,7 +35,10 @@ while True:
 
                 sg.popup("File exists and is readable!")
                 window.close()
-                expensesinput.main(values)
+                username = values['_NAME_']
+                email = values['_EMAIL_']
+                filepath = values['_FILEPATH_']
+                expensesinput.main()
     elif (button == 'Cancel'):
         break
 

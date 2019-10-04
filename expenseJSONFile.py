@@ -2,6 +2,7 @@ import json, sys
 import hashlib
 import datetime
 import logging
+import variables
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
@@ -30,13 +31,13 @@ conversionDict = {
 def readJSON(filepath):
     # parse file
     with open(filepath) as json_file:
-        data = json.load(json_file)
+        variables.jsonData = json.load(json_file)
         #logging.debug('Name: ' + data['name'])
         #for expense in data['expensesList']:
         #    logging.debug('ExpenseName: ' + expense['name'])
         #logging.debug(len(data['expensesList']))
     json_file.close()
-    return data
+    return variables.jsonData
 
 #
 # userAndPassCorrect
@@ -51,23 +52,22 @@ def userAndPassCorrect(email, password, JSONemail, JSONpass):
 # formatting a new expense dict into our JSON key values dict
 #
 def formatExpense(newExpense):
-    global conversionDict
     formattedExpense={}
     for key,value in newExpense.items():
         if ("_CAT_" in key):
             if (value):
-                formattedExpense["category"] = conversionDict[key]
+                formattedExpense["category"] = variables.conversionDict[key]
             else:
                 continue
         elif ("_FREQ_" in key):
             if (value):
-                formattedExpense["frequency"] = conversionDict[key]
+                formattedExpense["frequency"] = variables.conversionDict[key]
             else:
                 continue
         elif ("_QTY_" in key):
-            formattedExpense[conversionDict[key]] = int(value)
+            formattedExpense[variables.conversionDict[key]] = int(value)
         else:
-            formattedExpense[conversionDict[key]] = value
+            formattedExpense[variables.conversionDict[key]] = value
     return formattedExpense
 
 # writeExpense
@@ -75,22 +75,20 @@ def formatExpense(newExpense):
 #       we append this new (already formatted) expense with the rest
 # OUT: Return Expense (True) is all was good. False end other case
 def writeExpense(filename, expense):
-    # We read it all again
-    data = readJSON(filename)
     # Create new ID for our new expense based on length
-    expenseID = len(data['expensesList'])
+    expenseID = len(variables.jsonData['expensesList'])
     # We sort out our expense input and formatted
     newExpense = formatExpense(expense)
     # Update last time modified field
-    data["modified"] = str(datetime.datetime.now())
+    variables.jsonData["modified"] = str(datetime.datetime.now())
     # adding it to our NewExpense
     newExpense.update({'expenseID':expenseID})
     # Appending our new expense to our LIST of expenses (if any)
-    data['expensesList'].append(newExpense)
-    logging.debug(data['expensesList'])
+    variables.jsonData['expensesList'].append(newExpense)
+    logging.debug(variables.jsonData['expensesList'])
     try:
         with open(filename, 'w') as json_file:
-            json.dump(data, json_file, indent=4, sort_keys=True)
+            json.dump(variables.jsonData, json_file, indent=4, sort_keys=True)
         json_file.close()
         return True
     except:

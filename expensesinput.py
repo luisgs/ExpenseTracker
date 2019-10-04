@@ -2,16 +2,16 @@ import sys
 import logging
 import PySimpleGUI as sg
 import datetime
-import expenseJSONFile
+import expenseJSONFile, variables
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
 # Default global variables
 #
-username = "Default"
-email = "email@email.com"
-password = "81dc9bdb52d04dc20036dbd8313ed055"
-filename = "/tmp/deleteme.txt"
+#username = "Default"
+#email = "email@email.com"
+#password = "81dc9bdb52d04dc20036dbd8313ed055"
+#filepath = "/tmp/deleteme.txt"
 
 dictExpenses = {}
 
@@ -24,12 +24,26 @@ CAT = "_CAT_"
 FREQ = "_FREQ_"
 
 #
+# JSON file definition
+#
+expenseID = "ID"
+expenseName = "name"
+qty = "qty"
+frequency = "frequency"
+category = "category"
+date = "date"
+income = "income"
+# Here is our definition of ONE EXPENSE in a list.
+expense = [expenseID, expenseName, qty, frequency, category, date, income]
+
+#
 # First tab layaout
 #
 dictOfCategories = {'lodging': "Lodging",
                     'transport': "Transport",
                     'entertainemt': "Entertainemt",
-                    'salary': "Salary"}
+                    'salary': "Salary",
+                    'other': "Others"}
 categories = [[sg.Radio(value, "CAT", key=T1_KEY+CAT+key)] for key, value in dictOfCategories.items()]
 
 #
@@ -59,20 +73,14 @@ tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=T2_KEY+'_IN_')],
 #
 # Third tab layaout
 #
-headings = ['ID', 'Name', 'Quantity','Frequency', 'Category', 'Date', 'Expense?']  # the text of the headings
-
-header =  [[sg.Text('  ')] + [sg.Text(h, size=(14,1)) for h in headings]]  # build header layout
-input_rows = [[sg.Input(size=(15,1), pad=(0,0)) for col in range(4)] for row in range(10)]
-tab3_layout = header + input_rows
-
-tab3_layout = [[sg.T('This is inside tab 3')],
+tab3_layout = [[sg.T('Please press refresh to update your values.')],
                       [sg.Submit('Refresh', key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
 
 # Unmodificable values
-inmutableList = ['frequency', 'category', 'date']
+inmutableList = [frequency, category, date]
     # 'expenseID', 'Expense?'
 # Writable values
-writableList = ['Expense Name', 'qty']
+writableList = [expenseName, qty]
 
 #
 # ALL TABS' LAYOUTs TOGETHER
@@ -93,7 +101,7 @@ def printMatrixExpenses():
     global header, button, values, T3_KEY
     global writableList, inmutableList
 
-    dictExpenses = expenseJSONFile.readJSON(filename)['expensesList']
+    dictExpenses = expenseJSONFile.readJSON(variables.filepath)['expensesList']
 
     header = [[sg.Text('  ')] + [sg.Text(key, size=(15,1)) for key in writableList]
                 + [sg.Text(key, size=(15,1)) for key in inmutableList]]   # build header layout
@@ -114,7 +122,7 @@ def printMatrixExpenses():
                 sg.Tab('Expense Report', tab2_layout),
                 sg.Tab('List of Expenses', tab3_layout)]])]]
 
-    windowNew = sg.Window('NEW WINDOWS!!').Layout(layout)
+    windowNew = sg.Window('ExpenseTracker has been refreshed!').Layout(layout)
     window.close()
     #button, values = windowNew.Read()
     window = windowNew
@@ -127,48 +135,38 @@ def valuesOfTab(tab, allValues):
     #logging.debug(allValues)
     #logging.debug(tab)
     res = {key:val for key, val in allValues.items()
-            if key.startswith(tab)}
-    #logging.debug("HERE ARE VALUES FOR "+tab)
-    #logging.debug(res)
+                            if key.startswith(tab)}
     return res
 
-def main(argv):
+def main():
     # We bring global variables
-    global username, email, password, filename
     global dictExpenses
     global layout, window
-    username = argv['_NAME_']
-    email = argv['_EMAIL_']
-    password = argv['_PASSWORD_']
-    filename = argv['_FILEPATH_']
-
     # call external function to read our file
-    data = expenseJSONFile.readJSON(filename)
-
+    variables.jsonData = expenseJSONFile.readJSON(variables.filepath)
     # email and password is correct?
-    if not (expenseJSONFile.userAndPassCorrect(email, password, data["email"],data["password"])):
+    if not (expenseJSONFile.userAndPassCorrect(variables.email, variables.clearPassword,
+                                                    variables.jsonData["email"], variables.jsonData["password"])):
         sg.popup("USER AND/OR DO NOT MATCH!!!")
         exit()
     else:
         sg.popup("USER AND PASSWORD are MATCHING!")
 
     # send our window.layout out and wait for values
-    window = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
+    window = sg.Window('Hello {}!! Please, type in all your expenses'.format(variables.username)).Layout(layout)
 
     while True:
         button, values = window.Read()
-        # logging.debug(button)
-        # logging.debug(values)
-        dictExpenses = expenseJSONFile.readJSON(filename)['expensesList']
+        dictExpenses = expenseJSONFile.readJSON(variables.filepath)['expensesList']
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
         if (button == T1_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 1")
-            #expenseJSONFile.writeExpense(filename, data, expense):
+            #expenseJSONFile.writeExpense(variables.filepath, jsonData, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(T1_KEY, values)
             # We write OUR new Expense and RETURN all EXPENSE we have
-            expenseJSONFile.writeExpense(filename, res)
+            expenseJSONFile.writeExpense(variables.filepath, res)
         elif (button == T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
@@ -178,10 +176,6 @@ def main(argv):
             # we get ONLY values of this tab3
             res = valuesOfTab(T3_KEY, values)
             printMatrixExpenses()
-            # window1 = sg.Window('Hello {}!! Please, type in all your expenses'.format(username)).Layout(layout)
-            # window.close()
-            #window.Refresh()
-            # window = window1
         elif ('_CANCEL_' in button ) or (button is None):
             # Cancel button is pressed
             logging.debug("Cancel button has been pressed!")
@@ -193,5 +187,5 @@ def main(argv):
     exit()
 
 if __name__=="__main__":
-    # We send them all arg minus first one. app name.
-    main(sys.argv[1:])
+    # Call out our MAIN function
+    main()

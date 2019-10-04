@@ -5,8 +5,8 @@
   "modified":"2019",
   "expensesList": [
     {
-      "expenseID": 0,
-      "Expense Name": "Mortgage",
+      "ID": 0,
+      "name": "Mortgage",
       "qty": 10000,
       "frequency": "Monthly",
       "category": "loging",
@@ -14,8 +14,8 @@
       "in": false
     },
     {
-      "expenseID": 1,
-      "Expense Name": "Salary",
+      "ID": 1,
+      "name": "Salary",
       "qty": 15000,
       "frequency": "Monthly",
       "category": "salary",
