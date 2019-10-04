@@ -28,10 +28,12 @@ income = "income"
 T1_KEY = 'TAB_1'
 T2_KEY = 'TAB_2'
 T3_KEY = 'TAB_3'
-
+# ADditoinal keys for our categories
 CAT = "_CAT_"
 FREQ = "_FREQ_"
 DATE = "_DATE_"
+QTY = "_QTY_"
+EXP = "_EXPENSENAME_"
 
 #
 # JSON file definition
@@ -56,11 +58,11 @@ dictOfCategories = {'lodging': "Lodging",
 # Global variables
 #
 conversionDict = { T1_KEY+CAT+key:value for key, value in dictOfCategories.items()}
-conversionDictPart1={T1_KEY+DATE: "date",
-    T1_KEY+"_EXPENSENAME_": "Expense Name",
-    T1_KEY+"_FREQ_Monthly": "Monthly",
-    T1_KEY+"_FREQ_Yearly": "Yearly",
-    T1_KEY+"_EXPENSE_": "Expense?",
-    T1_KEY+"_QTY_": "qty"
+conversionDictPart1={T1_KEY+DATE: date,
+    T1_KEY + EXP: expenseName,
+    T1_KEY + FREQ + "Monthly": "Monthly",
+    T1_KEY + FREQ + "Yearly": "Yearly",
+    T1_KEY + "_EXPENSE_": income,
+    T1_KEY+QTY: qty
 }
 conversionDict.update(conversionDictPart1)

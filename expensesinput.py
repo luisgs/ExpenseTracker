@@ -27,12 +27,12 @@ categories = [[sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key)]
 tab1_layout =  [
           [sg.Text('Expense Name', size=(15, 1)),
             sg.InputText('Expense Name', key=variables.T1_KEY+'_EXPENSENAME_')],
-          [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=variables.T1_KEY+'_QTY_')],
+          [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=variables.T1_KEY + variables.QTY)],
           [sg.Text('Frequency', size=(15, 1)),
             sg.Radio('Monthly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Monthly", default=True),
             sg.Radio('Yearly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Yearly")],
           [sg.Frame("Categories", [[sg.Column(categories)]])],
-          [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=variables.T1_KEY+'_DATE_')],
+          [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=variables.T1_KEY + variables.DATE)],
           [sg.Text('Income/Outcome', size=(15, 1)),
             sg.Checkbox('Expense?', size=(10,1), default=True, key=variables.T1_KEY+"_EXPENSE_")],
           [sg.Submit(key=variables.T1_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T1_KEY+'_CANCEL_')]
@@ -90,7 +90,7 @@ def printMatrixExpenses():
                 + [sg.Text(value, key=key+"_"+str(i), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
         matrix = matrix + row
 
-    tab3_layout = matrix + [[sg.Submit('Refresh', key=T3_KEY+'_SUBMIT_'), sg.Cancel(key=T3_KEY+'_CANCEL_')]]
+    tab3_layout = matrix + [[sg.Submit('Refresh', key=variables.T3_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
 
     # tab3_layout = header + input_rows
     layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
@@ -135,21 +135,21 @@ def main():
         dictExpenses = expenseJSONFile.readJSON(variables.filepath)['expensesList']
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
-        if (button == T1_KEY+'_SUBMIT_'):
+        if (button == variables.T1_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 1")
             #expenseJSONFile.writeExpense(variables.filepath, jsonData, expense):
             # we get ONLY values of this tab1
-            res = valuesOfTab(T1_KEY, values)
+            res = valuesOfTab(variables.T1_KEY, values)
             # We write OUR new Expense and RETURN all EXPENSE we have
-            expenseJSONFile.writeExpense(variables.filepath, res)
-        elif (button == T2_KEY+'_SUBMIT_'):
+            expenseJSONFile.writeExpense(res)
+        elif (button == variables.T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
-            res = valuesOfTab(T2_KEY, values)
-        elif (button == T3_KEY+'_SUBMIT_'):
+            res = valuesOfTab(variables.T2_KEY, values)
+        elif (button == variables.T3_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 3")
             # we get ONLY values of this tab3
-            res = valuesOfTab(T3_KEY, values)
+            res = valuesOfTab(variables.T3_KEY, values)
             printMatrixExpenses()
         elif ('_CANCEL_' in button ) or (button is None):
             # Cancel button is pressed

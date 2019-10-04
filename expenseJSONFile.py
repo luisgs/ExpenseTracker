@@ -13,18 +13,7 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 #
 # Global variables
 #
-conversionDict = {
-    "TAB_1_CAT_Loging": "loging",
-    "TAB_1_CAT_Transport": "Transport",
-    "TAB_1_CAT_Entertainment": "Entertainment",
-    "TAB_1_CAT_Salary": "salary",
-    "TAB_1_DATE_": "date",
-    "TAB_1_EXPENSENAME_": "Expense Name",
-    "TAB_1_FREQ_Monthly": "Monthly",
-    "TAB_1_FREQ_Yearly": "Yearly",
-    "TAB_1_EXPENSE_": "Expense?",
-    "TAB_1_QTY_": "qty",
-}
+
 
 # readJSON
 # OUT: Open file (all granted) and return all file data
@@ -54,18 +43,20 @@ def userAndPassCorrect(email, password, JSONemail, JSONpass):
 def formatExpense(newExpense):
     formattedExpense={}
     for key,value in newExpense.items():
-        if ("_CAT_" in key):
-            if (value):
-                formattedExpense["category"] = variables.conversionDict[key]
-            else:
-                continue
-        elif ("_FREQ_" in key):
-            if (value):
-                formattedExpense["frequency"] = variables.conversionDict[key]
-            else:
-                continue
-        elif ("_QTY_" in key):
+        if (variables.EXP in key):  # Expense Name
+            formattedExpense[variables.conversionDict[key]] = value
+        elif (variables.QTY in key):
             formattedExpense[variables.conversionDict[key]] = int(value)
+        elif (variables.FREQ in key):
+            if (value):
+                formattedExpense[variables.frequency] = variables.conversionDict[key]
+            else:
+                continue
+        elif (variables.CAT in key):
+            if (value):
+                formattedExpense[variables.category] = variables.conversionDict[key]
+            else:
+                continue
         else:
             formattedExpense[variables.conversionDict[key]] = value
     return formattedExpense
@@ -74,20 +65,21 @@ def formatExpense(newExpense):
 # IN: we receive an expense dict and filename filepath
 #       we append this new (already formatted) expense with the rest
 # OUT: Return Expense (True) is all was good. False end other case
-def writeExpense(filename, expense):
+def writeExpense(expense):
     # Create new ID for our new expense based on length
-    expenseID = len(variables.jsonData['expensesList'])
+    newExpenseID = len(variables.jsonData['expensesList'])
+    logging.debug(expense)
     # We sort out our expense input and formatted
     newExpense = formatExpense(expense)
     # Update last time modified field
     variables.jsonData["modified"] = str(datetime.datetime.now())
     # adding it to our NewExpense
-    newExpense.update({'expenseID':expenseID})
+    newExpense.update({variables.expenseID:newExpenseID})
     # Appending our new expense to our LIST of expenses (if any)
     variables.jsonData['expensesList'].append(newExpense)
     logging.debug(variables.jsonData['expensesList'])
     try:
-        with open(filename, 'w') as json_file:
+        with open(variables.filepath, 'w') as json_file:
             json.dump(variables.jsonData, json_file, indent=4, sort_keys=True)
         json_file.close()
         return True

@@ -1,26 +1,35 @@
 {
     "email": "email@address.com",
     "expensesList": [
-      {
-        "ID": 0,
-        "name": "Mortgage",
-        "qty": 10000,
-        "frequency": "Monthly",
-        "category": "loging",
-        "date": "1-1-1980",
-        "in": false
-      },
-      {
-        "ID": 1,
-        "name": "Salary",
-        "qty": 15000,
-        "frequency": "Monthly",
-        "category": "salary",
-        "date": "1-1-1980",
-        "in": true
-      }
+        {
+            "ID": 0,
+            "category": "loging",
+            "date": "1-1-1980",
+            "frequency": "Monthly",
+            "in": false,
+            "name": "Mortgage",
+            "qty": 10000
+        },
+        {
+            "ID": 1,
+            "category": "salary",
+            "date": "1-1-1980",
+            "frequency": "Monthly",
+            "in": true,
+            "name": "Salary",
+            "qty": 15000
+        },
+        {
+            "ID": 2,
+            "category": "Others",
+            "date": "2019-10-04",
+            "frequency": "Monthly",
+            "income": true,
+            "name": "Expense Name",
+            "qty": 100
+        }
     ],
-    "modified": "2019-10-04 12:16:11.122249",
+    "modified": "2019-10-04 16:43:50.542960",
     "name": "name",
     "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }
