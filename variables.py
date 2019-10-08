@@ -25,6 +25,8 @@ QTY = "_QTY_"
 EXP = "_EXPENSENAME_"
 SUBMIT = "_SUBMIT_"
 UPDEXPS = "_UPDEXPS_"
+ID = "_ID_"
+INCOME = "_EXPENSE_"
 
 #
 # JSON file definition
@@ -36,8 +38,15 @@ frequency = "frequency"
 category = "category"
 date = "date"
 income = "income"
+dictJSON = {expenseName:EXP,
+            expenseID:ID,
+            expenseName:EXP,
+            qty:QTY,
+            frequency:FREQ,
+            category:CAT,
+            date:DATE,
+            income:INCOME}
 expense = [expenseID, expenseName, qty, frequency, category, date, income]
-
 #
 #
 dictOfCategories = {'lodging': "Lodging",

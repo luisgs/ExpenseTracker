@@ -22,7 +22,7 @@ categories = [[sg.Radio(value, "CAT", key=variables.T1_KEY+variables.CAT+key)]
 # ..we use T1_key for labeling our inputs
 tab1_layout =  [
           [sg.Text('Expense Name', size=(15, 1)),
-            sg.InputText('Expense Name', key=variables.T1_KEY+'_EXPENSENAME_')],
+            sg.InputText('Expense Name', key=variables.T1_KEY+variables.EXP)],
           [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=variables.T1_KEY + variables.QTY)],
           [sg.Text('Frequency', size=(15, 1)),
             sg.Radio('Monthly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Monthly", default=True),
@@ -30,7 +30,7 @@ tab1_layout =  [
           [sg.Frame("Categories", [[sg.Column(categories)]])],
           [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=variables.T1_KEY + variables.DATE)],
           [sg.Text('Income/Outcome', size=(15, 1)),
-            sg.Checkbox('Expense?', size=(10,1), default=True, key=variables.T1_KEY+"_EXPENSE_")],
+            sg.Checkbox('Expense?', size=(10,1), default=True, key=variables.T1_KEY+variables.INCOME)],
           [sg.Submit(key=variables.T1_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T1_KEY+'_CANCEL_')]
          ]
 
@@ -81,8 +81,8 @@ def printMatrixExpenses():
     for i in range(len(dictExpenses)):
         # current Expense in our dictionary
         expense = dictExpenses[i]
-        row = [[sg.Text('  ')] + [sg.InputText(expense[writableList[elemKey]], key=writableList[elemKey]+"_"+str(expense[variables.expenseID]), size=(15,1)) for elemKey in range(len(writableList))]
-                + [sg.Text(value, key=key+"_"+str(expense[variables.expenseID]), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
+        row = [[sg.Text('  ')] + [sg.InputText(expense[writableList[elemKey]], key=variables.T3_KEY+variables.dictJSON[writableList[elemKey]]+str(expense[variables.expenseID]), size=(15,1)) for elemKey in range(len(writableList))]
+                + [sg.Text(value, key=variables.T3_KEY+variables.dictJSON[key]+str(expense[variables.expenseID]), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
         matrix = matrix + row
 
     tab3_layout = matrix + [[sg.Submit('Update values!',
@@ -98,6 +98,10 @@ def printMatrixExpenses():
     window.close()
     #button, values = windowNew.Read()
     window = windowNew
+
+
+def updateExpenseValues():
+    return True
 
 #
 # valuesOfTab
@@ -151,6 +155,7 @@ def main():
         elif (button == variables.T3_KEY+variables.UPDEXPS):
             logging.debug("Refresh update values")
             logging.debug(values)
+            updateExpenseValues()
             # We write OUR new Expense and RETURN all EXPENSE we have
             # expenseJSONFile.writeExpense(res)
         elif ('_CANCEL_' in button ) or (button is None):
