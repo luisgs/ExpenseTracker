@@ -17,7 +17,11 @@ jsonData = None
 T1_KEY = 'TAB_1'
 T2_KEY = 'TAB_2'
 T3_KEY = 'TAB_3'
-# ADditoinal keys for our categories
+# Additoinal keys for our categories
+NAME = "_NAME_"
+EMAIL = '_EMAIL_'
+PASSWORD = '_PASSWORD_'
+FILEPATH = '_FILEPATH_'
 CAT = "_CAT_"
 FREQ = "_FREQ_"
 DATE = "_DATE_"

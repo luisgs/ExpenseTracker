@@ -9,13 +9,13 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 layout = [
           [sg.Text('Please enter your information:')],
           [sg.Text('Name', size=(15, 1)),
-            sg.InputText(variables.username, key='_NAME_')],
+            sg.InputText(variables.username, key=variables.NAME)],
           [sg.Text('Email', size=(15, 1)),
-            sg.InputText(variables.email, key='_EMAIL_')],
+            sg.InputText(variables.email, key=variables.EMAIL)],
           [sg.Text('Password', size=(15, 1)),
-            sg.InputText(variables.clearPassword, password_char='*', key='_PASSWORD_')],
+            sg.InputText(variables.clearPassword, password_char='*', key=variables.PASSWORD)],
           [sg.Text('Expense File location:', size=(15, 1)),
-            sg.In(variables.defaultFilePath, key='_FILEPATH_'), sg.FileBrowse()],
+            sg.In(variables.defaultFilePath, key=variables.FILEPATH), sg.FileBrowse()],
           [sg.OK(tooltip='Click to submit this window'), sg.Cancel()]
          ]
 
@@ -24,20 +24,20 @@ window = sg.Window('Welcome to Expense Tracker').Layout(layout)
 while True:
     button, values = window.Read()
     if (button=='OK'):
-        if not (os.path.exists(values['_FILEPATH_'])):
+        if not (os.path.exists(values[variables.FILEPATH])):
             sg.popup("File DOES NOT EXIST!")
         else:
-            if not (os.access(values['_FILEPATH_'], os.R_OK)):
+            if not (os.access(values[variables.FILEPATH], os.R_OK)):
                 sg.popup("File CANNOT be READ!")
-            elif not (os.access(values['_FILEPATH_'], os.W_OK)):
+            elif not (os.access(values[variables.FILEPATH], os.W_OK)):
                 sg.popup("File CANNOT be WRITTEN!")
             else:
 
                 sg.popup("File exists and is readable!")
                 window.close()
-                username = values['_NAME_']
-                email = values['_EMAIL_']
-                filepath = values['_FILEPATH_']
+                username = values[variables.NAME]
+                email = values[variables.EMAIL]
+                filepath = values[variables.FILEPATH]
                 expensesinput.main()
     elif (button == 'Cancel'):
         break
