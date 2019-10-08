@@ -13,17 +13,6 @@ filepath = defaultFilePath
 # All JSON file is read and stored in here in python format (jsonload)
 jsonData = None
 
-#
-# JSON file definition
-#
-expenseID = "ID"
-expenseName = "name"
-qty = "qty"
-frequency = "frequency"
-category = "category"
-date = "date"
-income = "income"
-
 # Tabs preffix keys to differenciate submnittted values.
 T1_KEY = 'TAB_1'
 T2_KEY = 'TAB_2'
@@ -34,6 +23,8 @@ FREQ = "_FREQ_"
 DATE = "_DATE_"
 QTY = "_QTY_"
 EXP = "_EXPENSENAME_"
+SUBMIT = "_SUBMIT_"
+UPDEXPS = "_UPDEXPS_"
 
 #
 # JSON file definition

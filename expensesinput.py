@@ -45,7 +45,7 @@ tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=variables.T2_KEY+'_IN_
 # Third tab layaout
 #
 tab3_layout = [[sg.T('Please press refresh to update your values.')],
-                      [sg.Submit('Refresh', key=variables.T3_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
+                      [sg.Submit('Refresh!', key=variables.T3_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
 
 #
 # ALL TABS' LAYOUTs TOGETHER
@@ -81,11 +81,13 @@ def printMatrixExpenses():
     for i in range(len(dictExpenses)):
         # current Expense in our dictionary
         expense = dictExpenses[i]
-        row = [[sg.Text('  ')] + [sg.InputText(expense[writableList[elemKey]], key=writableList[elemKey]+"_"+str(i), size=(15,1)) for elemKey in range(len(writableList))]
-                + [sg.Text(value, key=key+"_"+str(i), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
+        row = [[sg.Text('  ')] + [sg.InputText(expense[writableList[elemKey]], key=writableList[elemKey]+"_"+str(expense[variables.expenseID]), size=(15,1)) for elemKey in range(len(writableList))]
+                + [sg.Text(value, key=key+"_"+str(expense[variables.expenseID]), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
         matrix = matrix + row
 
-    tab3_layout = matrix + [[sg.Submit('Refresh', key=variables.T3_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
+    tab3_layout = matrix + [[sg.Submit('Update values!',
+                                key=variables.T3_KEY+variables.UPDEXPS),
+                                    sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
 
     # tab3_layout = header + input_rows
     layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
@@ -141,11 +143,16 @@ def main():
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
             res = valuesOfTab(variables.T2_KEY, values)
-        elif (button == variables.T3_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 3")
+        elif (button == variables.T3_KEY+'_SUBMIT_'):
             # we get ONLY values of this tab3
             res = valuesOfTab(variables.T3_KEY, values)
             printMatrixExpenses()
+        elif (button == variables.T3_KEY+variables.UPDEXPS):
+            logging.debug("Refresh update values")
+            logging.debug(values)
+            # We write OUR new Expense and RETURN all EXPENSE we have
+            # expenseJSONFile.writeExpense(res)
         elif ('_CANCEL_' in button ) or (button is None):
             # Cancel button is pressed
             logging.debug("Cancel button has been pressed!")
