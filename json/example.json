@@ -5,40 +5,58 @@
             "ID": 0,
             "category": "loging",
             "date": "1-1-1980",
+            "expenseName": "Mortgage",
             "frequency": "Monthly",
             "in": false,
-            "name": "Mortgage",
             "qty": 10000
         },
         {
             "ID": 1,
             "category": "salary",
             "date": "1-1-1980",
+            "expenseName": "Salary",
             "frequency": "Monthly",
             "in": true,
-            "name": "Salary",
             "qty": 15000
         },
         {
             "ID": 2,
             "category": "Others",
-            "date": "2019-10-04",
+            "date": "2019-10-09",
+            "expenseName": "Expense Name",
             "frequency": "Monthly",
             "income": true,
-            "name": "Expense Name",
             "qty": 100
         },
         {
             "ID": 3,
             "category": "Others",
-            "date": "2019-10-04",
+            "date": "2019-10-09",
+            "expenseName": "Expense Name",
             "frequency": "Monthly",
             "income": true,
-            "name": "123123",
+            "qty": 100
+        },
+        {
+            "ID": 4,
+            "category": "Others",
+            "date": "2019-10-09",
+            "expenseName": "Expense Name",
+            "frequency": "Monthly",
+            "income": true,
+            "qty": 100
+        },
+        {
+            "ID": 5,
+            "category": "Others",
+            "date": "2019-10-09",
+            "expenseName": "Expense Name",
+            "frequency": "Monthly",
+            "income": true,
             "qty": 100
         }
     ],
-    "modified": "2019-10-04 17:03:56.194671",
+    "modified": "2019-10-09 15:28:50.048878",
     "name": "name",
     "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }

@@ -100,9 +100,6 @@ def printMatrixExpenses():
     window = windowNew
 
 
-def updateExpenseValues():
-    return True
-
 #
 # valuesOfTab
 # IN: We receive a tab preffix (string) and a dict of values (entries)
@@ -113,6 +110,7 @@ def valuesOfTab(tab, allValues):
     res = {key:val for key, val in allValues.items()
                             if key.startswith(tab)}
     return res
+
 
 def main():
     # We bring global variables
@@ -155,7 +153,9 @@ def main():
         elif (button == variables.T3_KEY+variables.UPDEXPS):
             logging.debug("Refresh update values")
             logging.debug(values)
-            updateExpenseValues()
+            res = valuesOfTab(variables.T3_KEY, values)
+            logging.debug(res)
+            printMatrixExpenses()
             # We write OUR new Expense and RETURN all EXPENSE we have
             # expenseJSONFile.writeExpense(res)
         elif ('_CANCEL_' in button ) or (button is None):

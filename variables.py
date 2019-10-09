@@ -8,6 +8,7 @@ email = "email@address.com"
 clearPassword = "1234"
 password = "81dc9bdb52d04dc20036dbd8313ed055"
 defaultFilePath = 'C:\\Users\\gomezlui\\Documents\\Personal\\PythonPersonalProjects\\ExpenseTracker\\json\\example.json'
+# JSON file that contains our records!
 filepath = defaultFilePath
 
 # All JSON file is read and stored in here in python format (jsonload)
@@ -36,7 +37,7 @@ INCOME = "_EXPENSE_"
 # JSON file definition
 #
 expenseID = "ID"
-expenseName = "name"
+expenseName = "expenseName"
 qty = "qty"
 frequency = "frequency"
 category = "category"
