@@ -101,6 +101,17 @@ def printMatrixExpenses():
 
 
 #
+#
+def updateExpenseData(tab3Data):
+    # All expense list!
+    for i in range(len(variables.jsonData['expensesList'])):
+        # NAME
+        variables.jsonData['expensesList'][i][variables.expenseName] = tab3Data[variables.T3_KEY+variables.EXP+str(i)]
+        # QTY
+        variables.jsonData['expensesList'][i][variables.qty] = tab3Data[variables.T3_KEY+variables.QTY+str(i)]
+    expenseJSONFile.writeExpensesList()
+
+#
 # valuesOfTab
 # IN: We receive a tab preffix (string) and a dict of values (entries)
 # OUT: We return ONLY a dict with key?values for this particular tab
@@ -141,6 +152,7 @@ def main():
             res = valuesOfTab(variables.T1_KEY, values)
             # We write OUR new Expense and RETURN all EXPENSE we have
             expenseJSONFile.writeExpense(res)
+            printMatrixExpenses()
         elif (button == variables.T2_KEY+'_SUBMIT_'):
             sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
@@ -152,12 +164,14 @@ def main():
             printMatrixExpenses()
         elif (button == variables.T3_KEY+variables.UPDEXPS):
             logging.debug("Refresh update values")
-            logging.debug(values)
+            # logging.debug(values) # All values!
             res = valuesOfTab(variables.T3_KEY, values)
             logging.debug(res)
-            printMatrixExpenses()
             # We write OUR new Expense and RETURN all EXPENSE we have
             # expenseJSONFile.writeExpense(res)
+#            printMatrixExpenses()
+            updateExpenseData(res)
+            printMatrixExpenses()
         elif ('_CANCEL_' in button ) or (button is None):
             # Cancel button is pressed
             logging.debug("Cancel button has been pressed!")

@@ -76,7 +76,7 @@ def formatExpense(newExpense):
 def writeExpense(expense):
     # Create new ID for our new expense based on length
     newExpenseID = len(variables.jsonData['expensesList'])
-    logging.debug(expense)
+    # logging.debug(expense)
     # We sort out our expense input and formatted
     newExpense = formatExpense(expense)
     # Update last time modified field
@@ -85,7 +85,7 @@ def writeExpense(expense):
     newExpense.update({variables.expenseID:newExpenseID})
     # Appending our expense to our LIST of expenses (if any)
     variables.jsonData['expensesList'].append(newExpense)
-    logging.debug(variables.jsonData['expensesList'])
+    # logging.debug(variables.jsonData['expensesList'])
     try:
         with open(variables.filepath, 'w') as json_file:
             json.dump(variables.jsonData, json_file, indent=4, sort_keys=True)
@@ -95,6 +95,17 @@ def writeExpense(expense):
         logging.error("Writting New Expense into file has failed!")
         return False
 
+def writeExpensesList():
+    # Update last time modified field
+    variables.jsonData["modified"] = str(datetime.datetime.now())
+    try:
+        with open(variables.filepath, 'w') as json_file:
+            json.dump(variables.jsonData, json_file, indent=4, sort_keys=True)
+        json_file.close()
+        return True
+    except:
+        logging.error("Writting Expenses List into file has failed!")
+        return False
 
 #
 # CREATE NEW EXFILE
