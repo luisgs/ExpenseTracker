@@ -128,6 +128,7 @@ def valuesOfTab(tab, allValues):
 def showMonthlyGraph(res):
     # listExpenses = [{'ID': 0, 'category': 'loging', 'date': '1-1-1980', 'expenseName': 'Deleteme!', 'frequency': 'Monthly', 'in': False, 'qty': '10000'}]
     listExpenses = variables.jsonData['expensesList']
+    result = {}
     logging.debug(listExpenses)
     for i in range(len(listExpenses)):
         # HOw many times is repeated monthly!
@@ -140,16 +141,21 @@ def showMonthlyGraph(res):
 
         # Amount is positive or negative
         if (listExpenses[i][variables.income]):
-            value = listExpenses[i][variables.qty]
+            value = int(listExpenses[i][variables.qty])
         else:
             value = -int(listExpenses[i][variables.qty])
 
-        # Get day of a datetime
+        # Get day of a string datetime!
         day = datetime.datetime.strptime(listExpenses[i][variables.date], '%Y-%m-%d').strftime("%d")
-        print(day)
+        # {day:qty.freq}
+        tuple = {day:(value/frequency)}
 
+        # Create and update dictionary
+        # sum the values with same keys
+        result[day] = result.get(day, 0) + tuple[day]
 
-
+    logging.debug(result)
+    return result
 
 
 def main():
