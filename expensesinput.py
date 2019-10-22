@@ -66,7 +66,7 @@ def printMatrixExpenses():
     global header, button, values
 
     # Unmodificable values
-    inmutableList = [variables.frequency, variables.category, variables.date]
+    inmutableList = [variables.category, variables.date, variables.frequency]
         # 'expenseID', 'Expense?'
     # Writable values
     writableList = [variables.expenseName, variables.qty]
@@ -122,6 +122,35 @@ def valuesOfTab(tab, allValues):
                             if key.startswith(tab)}
     return res
 
+#
+#
+#
+def showMonthlyGraph(res):
+    # listExpenses = [{'ID': 0, 'category': 'loging', 'date': '1-1-1980', 'expenseName': 'Deleteme!', 'frequency': 'Monthly', 'in': False, 'qty': '10000'}]
+    listExpenses = variables.jsonData['expensesList']
+    logging.debug(listExpenses)
+    for i in range(len(listExpenses)):
+        # HOw many times is repeated monthly!
+        if (listExpenses[i][variables.category] == "Yearly"):
+            frequency = 12
+        elif (listExpenses[i][variables.category] == "Weekly"):
+            frequency = 0.25
+        else:
+            frequency=1
+
+        # Amount is positive or negative
+        if (listExpenses[i][variables.income]):
+            value = listExpenses[i][variables.qty]
+        else:
+            value = -int(listExpenses[i][variables.qty])
+
+        # Get day of a datetime
+        day = datetime.datetime.strptime(listExpenses[i][variables.date], '%Y-%m-%d').strftime("%d")
+        print(day)
+
+
+
+
 
 def main():
     # We bring global variables
@@ -146,27 +175,27 @@ def main():
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
         if (button == variables.T1_KEY+'_SUBMIT_'):
-            sg.popup("Submit layout 1")
             #expenseJSONFile.writeExpense(variables.filepath, jsonData, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(variables.T1_KEY, values)
             # We write OUR new Expense and RETURN all EXPENSE we have
-            expenseJSONFile.writeExpense(res)
+            if expenseJSONFile.writeExpense(res):
+                sg.popup("New Expense created succesfuly!")
+            else:
+                sg.PopupError("Error creating new Expense!")
             printMatrixExpenses()
         elif (button == variables.T2_KEY+'_SUBMIT_'):
-            sg.popup("Submit layout 2")
             # we get ONLY values of this tab2
             res = valuesOfTab(variables.T2_KEY, values)
-            sg.popup("Submit layout 3")
+            showMonthlyGraph(res)
         elif (button == variables.T3_KEY+'_SUBMIT_'):
             # we get ONLY values of this tab3
             res = valuesOfTab(variables.T3_KEY, values)
             printMatrixExpenses()
         elif (button == variables.T3_KEY+variables.UPDEXPS):
-            logging.debug("Refresh update values")
+            # logging.debug("Refresh update values")
             # logging.debug(values) # All values!
             res = valuesOfTab(variables.T3_KEY, values)
-            logging.debug(res)
             # We write OUR new Expense and RETURN all EXPENSE we have
             # expenseJSONFile.writeExpense(res)
 #            printMatrixExpenses()
