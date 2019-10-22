@@ -6,21 +6,21 @@
   "expensesList": [
     {
       "ID": 0,
-      "name": "Mortgage",
+      "expenseName": "Mortgage",
       "qty": 10000,
       "frequency": "Monthly",
       "category": "loging",
-      "date": "1-1-1980",
-      "in": false
+      "date": "2019-10-21",
+      "income": false
     },
     {
       "ID": 1,
-      "name": "Salary",
+      "expenseName": "Salary",
       "qty": 15000,
       "frequency": "Monthly",
       "category": "salary",
-      "date": "1-1-1980",
-      "in": true
+      "date": "2019-10-21",
+      "income": true
     }
   ]
 }

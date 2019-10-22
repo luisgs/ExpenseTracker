@@ -4,59 +4,113 @@
         {
             "ID": 0,
             "category": "loging",
-            "date": "1-1-1980",
-            "expenseName": "Mortgage",
+            "date": "2019-10-21",
+            "expenseName": "Deleteme!",
             "frequency": "Monthly",
-            "in": false,
-            "qty": 10000
+            "income": false,
+            "qty": "10000"
         },
         {
             "ID": 1,
             "category": "salary",
-            "date": "1-1-1980",
+            "date": "2019-10-21",
             "expenseName": "Salary",
             "frequency": "Monthly",
-            "in": true,
-            "qty": 15000
+            "income": true,
+            "qty": "15000"
         },
         {
             "ID": 2,
             "category": "Others",
-            "date": "2019-10-09",
-            "expenseName": "Expense Name",
+            "date": "2019-10-21",
+            "expenseName": "Nuevo",
             "frequency": "Monthly",
             "income": true,
-            "qty": 100
+            "qty": "100"
         },
         {
             "ID": 3,
             "category": "Others",
-            "date": "2019-10-09",
-            "expenseName": "Expense Name",
+            "date": "2019-10-21",
+            "expenseName": "expense3",
             "frequency": "Monthly",
             "income": true,
-            "qty": 100
+            "qty": "100"
         },
         {
             "ID": 4,
             "category": "Others",
-            "date": "2019-10-09",
+            "date": "2019-10-21",
+            "expenseName": "qwer",
+            "frequency": "Monthly",
+            "income": true,
+            "qty": "100"
+        },
+        {
+            "ID": 5,
+            "category": "Others",
+            "date": "2019-10-21",
+            "expenseName": "Expense Name",
+            "frequency": "Monthly",
+            "income": true,
+            "qty": "100"
+        },
+        {
+            "ID": 6,
+            "category": "Others",
+            "date": "2019-10-21",
+            "expenseName": "Expense Name",
+            "frequency": "Monthly",
+            "income": true,
+            "qty": "100"
+        },
+        {
+            "ID": 7,
+            "category": "Others",
+            "date": "2019-10-21",
+            "expenseName": "Expense Name",
+            "frequency": "Monthly",
+            "income": true,
+            "qty": "100"
+        },
+        {
+            "ID": 8,
+            "category": "Others",
+            "date": "2019-10-21",
+            "expenseName": "Expense Nameqweqwe",
+            "frequency": "Monthly",
+            "income": true,
+            "qty": "100"
+        },
+        {
+            "ID": 9,
+            "category": "Others",
+            "date": "2019-10-21",
+            "expenseName": "Soy yo?!",
+            "frequency": "Monthly",
+            "income": true,
+            "qty": "100"
+        },
+        {
+            "ID": 10,
+            "category": "Others",
+            "date": "2019-10-21",
             "expenseName": "Expense Name",
             "frequency": "Monthly",
             "income": true,
             "qty": 100
         },
         {
-            "ID": 5,
+            "ID": 11,
             "category": "Others",
-            "date": "2019-10-09",
+            "date": "2019-10-22",
             "expenseName": "Expense Name",
-            "frequency": "Monthly",
+            "frequency": "Yearly",
             "income": true,
             "qty": 100
         }
     ],
-    "modified": "2019-10-09 15:28:50.048878",
+    "modified": "2019-10-22 22:49:42.231870",
     "name": "name",
     "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }
