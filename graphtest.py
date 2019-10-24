@@ -1,23 +1,27 @@
 import math
+import sys
+import logging
 import PySimpleGUI as sg
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
 # Dicts with expenses
 # Exmple = {'21': 5900.0, '22': -700.0}
-dailyExpense={'21': 5900.0, '22': -700.0}
+dailyExpense={'21': 5900.0, '22': -700.0, '20': 5000.0}
 
 
 # Varibles about Income Outcome
-maxIncome = max(dailyExpense, key=dailyExpense.get)
-minIncome = min(dailyExpense, key=dailyExpense.get)
-
+maxIncome = max(dailyExpense.values())
+minIncome = min(dailyExpense.values())
+logging.debug(maxIncome)
+logging.debug(minIncome)
 # Canvas canvas_size
 wide = 650  # x
 tall = 400  # y
 
 # Graph Starting Point
-xZero = -560
+xZero = int(wide*-0.85)
 xEnd = abs(xZero)
-yZero = -325
+yZero = int(tall*(-0.8))
 yEnd = abs(yZero)
 
 layout = [[sg.Graph(canvas_size=(wide, tall),
@@ -51,12 +55,27 @@ graph.DrawLine((xZero, 0), (xEnd, 0))
 for x in range(xZero, xEnd, 35):
     graph.DrawLine((x,-5), (x,+5))
 
-
+# Origin of line!
+pointA_X=xZero
+pointA_Y=0
 for key in range(1,31):
-    if key in dailyExpense:
-        graph.DrawCircle((75, dailyExpense[key]), 25,
+    logging.debug(key)
+    logging.debug(str(key))
+    if str(key) in dailyExpense:
+        logging.debug(dailyExpense[str(key)]*yEnd/maxIncome)
+        xValue=(2*xEnd/32) * (key - 15)
+        logging.debug(xValue)
+        graph.DrawCircle((xValue, dailyExpense[str(key)]*yEnd/maxIncome), 3,
                             fill_color='black',
-                            line_color='white')
+                            line_color='black')
+        graph.DrawLine((pointA_X, pointA_Y),
+                            (xValue, dailyExpense[str(key)]*yEnd/maxIncome))
+        pointA_X = xValue
+        pointA_Y = dailyExpense[str(key)]*yEnd/maxIncome
+
+graph.DrawLine((pointA_X, pointA_Y), (xEnd, pointA_Y))
+
+
 
 """
 DEBUG:root:{'21': 5900.0, '22': -700.0}
