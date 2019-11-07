@@ -1,6 +1,7 @@
 import sys
 import logging
 import PySimpleGUI as sg
+import numpy as np
 import datetime
 import expenseJSONFile, variables
 
@@ -26,7 +27,8 @@ tab1_layout =  [
           [sg.Text('Quantity', size=(15, 1)), sg.InputText(100, key=variables.T1_KEY + variables.QTY)],
           [sg.Text('Frequency', size=(15, 1)),
             sg.Radio('Monthly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Monthly", default=True),
-            sg.Radio('Yearly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Yearly")],
+            sg.Radio('Yearly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Yearly"),
+            sg.Radio('Weekly', "FREQ", key=variables.T1_KEY+variables.FREQ+"Weekly", default=True)],
           [sg.Frame("Categories", [[sg.Column(categories)]])],
           [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=variables.T1_KEY + variables.DATE)],
           [sg.Text('Income/Outcome', size=(15, 1)),
@@ -123,26 +125,28 @@ def valuesOfTab(tab, allValues):
     return res
 
 #
+# thirtyDaysExpenseList
+# Functioan that is used for our second tab
 #
-#
-def showMonthlyGraph(res):
+def thirtyDaysExpenseList():
     # listExpenses = [{'ID': 0, 'category': 'loging', 'date': '1-1-1980', 'expenseName': 'Deleteme!', 'frequency': 'Monthly', 'in': False, 'qty': '10000'}]
     listExpenses = variables.jsonData['expensesList']
     result = {}
     logging.debug(listExpenses)
     for i in range(len(listExpenses)):
-        # HOw many times is repeated monthly!
+        # How many times is repeated monthly!
         if (listExpenses[i][variables.category] == "Yearly"):
             frequency = 12
         elif (listExpenses[i][variables.category] == "Weekly"):
             frequency = 0.25
-        else:
+        else:   # motnhly!
             frequency=1
 
         # Amount is positive or negative
-        if (listExpenses[i][variables.income]):
-            value = int(listExpenses[i][variables.qty])
-        else:
+        # qty of our Expense:
+        value = int(listExpenses[i][variables.qty])
+        # if it is an expense then it is negative!
+        if (not listExpenses[i][variables.income]):
             value = -int(listExpenses[i][variables.qty])
 
         # Get day of a string datetime!
@@ -153,9 +157,103 @@ def showMonthlyGraph(res):
         # Create and update dictionary
         # sum the values with same keys
         result[day] = result.get(day, 0) + tuple[day]
-
-    logging.debug(result)
     return result
+
+#
+#
+#
+def showMonthlyGraph():
+    global tab1_layout, tab2_layout, tab3_layout, layout
+    global window
+    global header, button, values
+    # We calculate expenses in a mont bases
+    dailyExpense = thirtyDaysExpenseList()  # result = {'21': 5900.0, '22': -700.0}
+
+    # Varibles about Income Outcome
+    maxABSValue=max(max(dailyExpense.values()), abs(min(dailyExpense.values())))
+    # maxIncome = max(dailyExpense.values())
+    # minIncome = min(dailyExpense.values())
+    maxIncome = maxABSValue
+    minIncome = -maxABSValue
+    # Canvas canvas_size
+    wide = 650  # x
+    tall = 400  # y
+
+    # Graph Starting Point
+    xZero = int(wide*-0.85)
+    xEnd = abs(xZero)
+    yZero = int(tall*(-0.8))
+    yEnd = abs(yZero)
+    tab2_layout = [[sg.T('Your Monthly Expenses graph!')],
+            [sg.Graph(canvas_size=(wide, tall),
+                                    graph_bottom_left=(-wide, -tall),
+                                    graph_top_right=(wide, tall),
+                                    background_color='white', key='graph',
+                                    tooltip='Your daily account status!')],
+            [sg.Submit(key=variables.T2_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T2_KEY+'_CANCEL_')]]
+
+    layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
+                sg.Tab('Expense Report', tab2_layout),
+                sg.Tab('List of Expenses', tab3_layout)]])]]
+
+    windowNew = sg.Window('Hello {}!! Please, type in all your expenses'.format(variables.username)).Layout(layout).Finalize()
+    window.close()
+    #button, values = windowNew.Read()
+    window = windowNew
+    graph = window.Element('graph')
+
+    # Horizontal line with days of a Month!
+    graph.DrawLine((xZero, yZero), (xEnd, yZero))
+    # One bracket per day of month
+    day = 0
+    for x in range(xZero, xEnd, 35):
+        graph.DrawLine((x,yZero-5), (x,yZero+5))
+        graph.DrawText(day, (x,yZero-20), color='green')
+        day += 1
+
+    # Vertical line for Expense price
+    graph.DrawLine((xZero, yZero + 25), (xZero, yEnd-25))
+    graph.DrawLine((xZero-5, 0), (xZero+5, 0))
+    graph.DrawText(0, (xZero-20,0), color='green')
+    for y in range(yZero, yEnd-25, 50):
+        graph.DrawLine((xZero-5, y), (xZero+5, y))
+        graph.DrawText(int(y*maxIncome/yEnd), (xZero-30,y), color='green')
+
+    # HOrizontal line for Expense price
+    graph.DrawLine((xZero, 0), (xEnd, 0))
+    for x in range(xZero, xEnd, 35):
+        graph.DrawLine((x,-5), (x,+5))
+
+    # Origin of line!
+    pointA_X=xZero
+    pointA_Y=0
+    for key in range(1,31):
+        logging.debug(key)
+        logging.debug(str(key))
+        if str(key) in dailyExpense:
+            logging.debug(dailyExpense[str(key)]*yEnd/maxIncome)
+            xValue=(2*xEnd/32) * (key - 15)
+            logging.debug(xValue)
+            graph.DrawCircle((xValue, dailyExpense[str(key)]*yEnd/maxIncome), 3,
+                                fill_color='black',
+                                line_color='black')
+            if dailyExpense[str(key)]>0:
+                graph.DrawText(dailyExpense[str(key)],
+                                (xValue+40, dailyExpense[str(key)]*yEnd/maxIncome),
+                                 color='green')
+            else:
+                graph.DrawText(dailyExpense[str(key)],
+                                (xValue+40, dailyExpense[str(key)]*yEnd/maxIncome),
+                                color='red')
+
+            graph.DrawLine((pointA_X, pointA_Y),
+                                (xValue, dailyExpense[str(key)]*yEnd/maxIncome))
+            pointA_X = xValue
+            pointA_Y = dailyExpense[str(key)]*yEnd/maxIncome
+
+    graph.DrawLine((pointA_X, pointA_Y), (xEnd, pointA_Y))
+
+    return dailyExpense
 
 
 def main():
@@ -175,12 +273,13 @@ def main():
     # send our window.layout out and wait for values
     window = sg.Window('Hello {}!! Please, type in all your expenses'.format(variables.username)).Layout(layout)
     printMatrixExpenses()
+    showMonthlyGraph()
     while True:
         button, values = window.Read()
         dictExpenses = expenseJSONFile.readJSON(variables.filepath)['expensesList']
         # Depending on which SUBMIT (tab) is pressed, we act
         # First tab
-        if (button == variables.T1_KEY+'_SUBMIT_'):
+        if (button == variables.T1_KEY+'_SUBMIT_'):         # FIRST TAB
             #expenseJSONFile.writeExpense(variables.filepath, jsonData, expense):
             # we get ONLY values of this tab1
             res = valuesOfTab(variables.T1_KEY, values)
@@ -190,15 +289,17 @@ def main():
             else:
                 sg.PopupError("Error creating new Expense!")
             printMatrixExpenses()
-        elif (button == variables.T2_KEY+'_SUBMIT_'):
+            showMonthlyGraph()
+        elif (button == variables.T2_KEY+'_SUBMIT_'):       # SECOND TAB
             # we get ONLY values of this tab2
             res = valuesOfTab(variables.T2_KEY, values)
-            showMonthlyGraph(res)
-        elif (button == variables.T3_KEY+'_SUBMIT_'):
+            showMonthlyGraph()
+        elif (button == variables.T3_KEY+'_SUBMIT_'):       # THIRD TAB
             # we get ONLY values of this tab3
             res = valuesOfTab(variables.T3_KEY, values)
             printMatrixExpenses()
-        elif (button == variables.T3_KEY+variables.UPDEXPS):
+            showMonthlyGraph()
+        elif (button == variables.T3_KEY+variables.UPDEXPS):# THIRD TAB
             # logging.debug("Refresh update values")
             # logging.debug(values) # All values!
             res = valuesOfTab(variables.T3_KEY, values)
@@ -207,6 +308,7 @@ def main():
 #            printMatrixExpenses()
             updateExpenseData(res)
             printMatrixExpenses()
+            showMonthlyGraph()
         elif ('_CANCEL_' in button ) or (button is None):
             # Cancel button is pressed
             logging.debug("Cancel button has been pressed!")
