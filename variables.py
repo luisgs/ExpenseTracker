@@ -68,6 +68,7 @@ conversionDictPart1={T1_KEY+DATE: date,
     T1_KEY + EXP: expenseName,
     T1_KEY + FREQ + "Monthly": "Monthly",
     T1_KEY + FREQ + "Yearly": "Yearly",
+    T1_KEY + FREQ + "Weekly": "Weekly",
     T1_KEY + "_EXPENSE_": income,
     T1_KEY+QTY: qty
 }

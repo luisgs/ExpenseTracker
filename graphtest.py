@@ -11,8 +11,8 @@ dailyExpense={'21': -23201.0, '22': -700.0, '20': 5000.0}
 
 # Varibles about Income Outcome
 maxABSValue=max(max(dailyExpense.values()), abs(min(dailyExpense.values())))
-maxIncome = max(dailyExpense.values())
-minIncome = min(dailyExpense.values())
+# maxIncome = max(dailyExpense.values())
+# minIncome = min(dailyExpense.values())
 maxIncome = maxABSValue
 minIncome = -maxABSValue
 logging.debug(maxIncome)

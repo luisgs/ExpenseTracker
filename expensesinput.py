@@ -150,7 +150,7 @@ def thirtyDaysExpenseList():
             value = -int(listExpenses[i][variables.qty])
 
         # Get day of a string datetime!
-        day = datetime.datetime.strptime(listExpenses[i][variables.date], '%Y-%m-%d').strftime("%d")
+        day = int(datetime.datetime.strptime(listExpenses[i][variables.date], '%Y-%m-%d').strftime("%d"))
         # {day:qty.freq}
         tuple = {day:(value/frequency)}
 
@@ -168,7 +168,7 @@ def showMonthlyGraph():
     global header, button, values
     # We calculate expenses in a mont bases
     dailyExpense = thirtyDaysExpenseList()  # result = {'21': 5900.0, '22': -700.0}
-
+    logging.debug(dailyExpense)
     # Varibles about Income Outcome
     maxABSValue=max(max(dailyExpense.values()), abs(min(dailyExpense.values())))
     # maxIncome = max(dailyExpense.values())
@@ -227,29 +227,31 @@ def showMonthlyGraph():
     # Origin of line!
     pointA_X=xZero
     pointA_Y=0
+    currentStatus=0
     for key in range(1,31):
-        logging.debug(key)
-        logging.debug(str(key))
-        if str(key) in dailyExpense:
-            logging.debug(dailyExpense[str(key)]*yEnd/maxIncome)
+        if key in dailyExpense:
+            logging.debug(key)
+            logging.debug(dailyExpense[key]*yEnd/maxIncome)
             xValue=(2*xEnd/32) * (key - 15)
+            currentStatus=currentStatus+dailyExpense[key]
             logging.debug(xValue)
-            graph.DrawCircle((xValue, dailyExpense[str(key)]*yEnd/maxIncome), 3,
+            logging.debug(currentStatus)
+            graph.DrawCircle((xValue, currentStatus*yEnd/maxIncome), 3,
                                 fill_color='black',
                                 line_color='black')
-            if dailyExpense[str(key)]>0:
-                graph.DrawText(dailyExpense[str(key)],
-                                (xValue+40, dailyExpense[str(key)]*yEnd/maxIncome),
+            if dailyExpense[key]>0:
+                graph.DrawText(dailyExpense[key],
+                                (xValue+40, currentStatus*yEnd/maxIncome),
                                  color='green')
             else:
-                graph.DrawText(dailyExpense[str(key)],
-                                (xValue+40, dailyExpense[str(key)]*yEnd/maxIncome),
+                graph.DrawText(dailyExpense[key],
+                                (xValue+40, currentStatus*yEnd/maxIncome),
                                 color='red')
 
             graph.DrawLine((pointA_X, pointA_Y),
-                                (xValue, dailyExpense[str(key)]*yEnd/maxIncome))
+                                (xValue, currentStatus*yEnd/maxIncome))
             pointA_X = xValue
-            pointA_Y = dailyExpense[str(key)]*yEnd/maxIncome
+            pointA_Y = currentStatus*yEnd/maxIncome
 
     graph.DrawLine((pointA_X, pointA_Y), (xEnd, pointA_Y))
 
