@@ -169,6 +169,10 @@ def showMonthlyGraph():
     # We calculate expenses in a mont bases
     dailyExpense = thirtyDaysExpenseList()  # result = {'21': 5900.0, '22': -700.0}
     logging.debug(dailyExpense)
+    # SumALL POSITIVEs and ALL Expenses in different Varibles
+    allIncome=sum(value for value in dailyExpense.values() if value>0)
+    allOutcome=sum(value for value in dailyExpense.values() if value<0)
+
     # Varibles about Income Outcome
     maxABSValue=max(max(dailyExpense.values()), abs(min(dailyExpense.values())))
     # maxIncome = max(dailyExpense.values())
@@ -190,6 +194,7 @@ def showMonthlyGraph():
                                     graph_top_right=(wide, tall),
                                     background_color='white', key='graph',
                                     tooltip='Your daily account status!')],
+            [sg.Text("Total Income: "+ str(allIncome))],[sg.Text("Total Outcome: "+ str(allOutcome))],
             [sg.Submit(key=variables.T2_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T2_KEY+'_CANCEL_')]]
 
     layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
