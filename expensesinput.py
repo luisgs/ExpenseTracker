@@ -175,6 +175,7 @@ def showMonthlyGraph():
     # SumALL POSITIVEs and ALL Expenses in different Varibles
     allIncome=sum(value for value in dailyExpense.values() if value>0)
     allOutcome=sum(value for value in dailyExpense.values() if value<0)
+    grandTotal=allIncome + allOutcome
 
     # Varibles about Income Outcome
     maxABSValue=max(max(dailyExpense.values()), abs(min(dailyExpense.values())))
@@ -197,7 +198,9 @@ def showMonthlyGraph():
                                     graph_top_right=(wide, tall),
                                     background_color='white', key='graph',
                                     tooltip='Your daily account status!')],
-            [sg.Text("Total Income: "+ str(allIncome))],[sg.Text("Total Outcome: "+ str(allOutcome))],
+            [sg.Text("Total Income: "+ str(allIncome))],
+            [sg.Text("Total Outcome: "+ str(allOutcome))],
+            [sg.Text("Grand Total: "+ str(grandTotal))],
             [sg.Submit(key=variables.T2_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T2_KEY+'_CANCEL_')]]
 
     layout = [[sg.TabGroup([[sg.Tab('New Expense', tab1_layout),
