@@ -32,7 +32,7 @@ tab1_layout =  [
           [sg.Frame("Categories", [[sg.Column(categories)]])],
           [sg.Text('Date', size=(15, 1)), sg.InputText(str(datetime.date.today()), key=variables.T1_KEY + variables.DATE)],
           [sg.Text('Income/Outcome', size=(15, 1)),
-            sg.Checkbox('Expense?', size=(10,1), default=True, key=variables.T1_KEY+variables.INCOME)],
+            sg.Checkbox('Expense?', size=(10,1), default=False, key=variables.T1_KEY+variables.INCOME)],
           [sg.Submit(key=variables.T1_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T1_KEY+'_CANCEL_')]
          ]
 
@@ -145,8 +145,11 @@ def thirtyDaysExpenseList():
         # Amount is positive or negative
         # qty of our Expense:
         value = int(listExpenses[i][variables.qty])
+        logging.debug("ASDASDASDA")
+        logging.debug(listExpenses[i][variables.income])
+        logging.debug(listExpenses[i][variables.qty])
         # if it is an expense then it is negative!
-        if (not listExpenses[i][variables.income]):
+        if (listExpenses[i][variables.income] is False):
             value = -int(listExpenses[i][variables.qty])
 
         # Get day of a string datetime!
