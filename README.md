@@ -2,7 +2,7 @@
 
 Thanks to this application, you will be able to see and track your expenses. It will provide you of visual outputs, graphs, that will show your expenses.
 
-## Installation
+## Execution
   - Microsoft Windows: Execute ExpenseTracker.exe for running.
 
 ## Motivation
@@ -19,7 +19,6 @@ It works!
 
 I have also used Python 3.7.4 and lib (pip freeze):
   - matplotlib==3.1.1
-  - meross-iot==0.3.1.5
   - numpy==1.17.3
   - PyInstaller==3.5
   - PySimpleGUI==4.4.1
@@ -35,7 +34,8 @@ I have also used Python 3.7.4 and lib (pip freeze):
 ## Usage
 
 #### First Execution!
-First window will ask for username/password and a file. If file exists and user and password are right, you will see a new window with your information; eoc. app will create a new file with this information and you will be redirect to a new window as well.
+First window will ask for username/password and a file. If file exists and user and password are right, you will see a new window with your information;
+eoc. app will create a new file with this information taht you typed in (name/password) and you will be redirect to a new window as well with empty values.
 
 #### Tracking a new expense!
 Simple complete all fields that are shown in tab1. Click confirm/submit and data will be stored in your file.
@@ -50,9 +50,8 @@ Once is done, save it and new data will be stored in your file.
 ##### Notes:
 - Expenses can be also directly edited in your file. Close app before editing it.
 
-#### What have I learned?!
-
 ###### Links
+- https://pypi.org/project/PySimpleGUI/
 
 ###### Tools
   - [GitHub](http://github.com). http://github.com - automatic!
