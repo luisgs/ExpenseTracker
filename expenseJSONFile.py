@@ -4,7 +4,7 @@ import datetime
 import logging
 import variables
 
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+logging.basicConfig(stream=sys.stderr, level=logging.CRITICAL)
 #
 # Library for reading our JSON file
 # We include all necessary functions and operation for that in here

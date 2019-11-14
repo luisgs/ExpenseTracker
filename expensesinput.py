@@ -5,7 +5,7 @@ import numpy as np
 import datetime
 import expenseJSONFile, variables
 
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+logging.basicConfig(stream=sys.stderr, level=logging.CRITICAL)
 #
 # Default global variables
 #
@@ -40,14 +40,17 @@ tab1_layout =  [
 # Second tab layaout
 # WE HAVE TO USE KEY TAB_2
 #
-tab2_layout = [[sg.T('This is inside tab 2')], [sg.In(key=variables.T2_KEY+'_IN_')],
-          [sg.Submit(key=variables.T2_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T2_KEY+'_CANCEL_')]]
+tab2_layout = [[sg.T('This is inside tab 2')],
+                [sg.In(key=variables.T2_KEY+'_IN_')],
+                [sg.Submit(key=variables.T2_KEY+'_SUBMIT_'),
+                sg.Cancel(key=variables.T2_KEY+'_CANCEL_')]]
 
 #
 # Third tab layaout
 #
 tab3_layout = [[sg.T('Please press refresh to update your values.')],
-                      [sg.Submit('Refresh!', key=variables.T3_KEY+'_SUBMIT_'), sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
+                      [sg.Submit('Refresh!', key=variables.T3_KEY+'_SUBMIT_'),
+                      sg.Cancel(key=variables.T3_KEY+'_CANCEL_')]]
 
 #
 # ALL TABS' LAYOUTs TOGETHER
@@ -83,7 +86,8 @@ def printMatrixExpenses():
     for i in range(len(dictExpenses)):
         # current Expense in our dictionary
         expense = dictExpenses[i]
-        row = [[sg.Text('  ')] + [sg.InputText(expense[writableList[elemKey]], key=variables.T3_KEY+variables.dictJSON[writableList[elemKey]]+str(expense[variables.expenseID]), size=(15,1)) for elemKey in range(len(writableList))]
+        row = [[sg.Text('  ')]
+                + [sg.InputText(expense[writableList[elemKey]], key=variables.T3_KEY+variables.dictJSON[writableList[elemKey]]+str(expense[variables.expenseID]), size=(15,1)) for elemKey in range(len(writableList))]
                 + [sg.Text(value, key=variables.T3_KEY+variables.dictJSON[key]+str(expense[variables.expenseID]), size=(15,1)) for key, value in dictExpenses[i].items() if key in inmutableList]]
         matrix = matrix + row
 

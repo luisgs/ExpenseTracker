@@ -8,7 +8,7 @@
             "expenseName": "Mortgage",
             "frequency": "Monthly",
             "income": false,
-            "qty": 15300
+            "qty": "15300"
         },
         {
             "ID": 1,
@@ -17,109 +17,109 @@
             "expenseName": "Salary",
             "frequency": "Monthly",
             "income": true,
-            "qty": 60000
+            "qty": "60000"
         },
         {
             "ID": 2,
-            "category": "Others",
-            "date": "2019-11-07",
-            "expenseName": "Expense Name",
-            "frequency": "Monthly",
-            "income": false,
-            "qty": 100
-        },
-        {
-            "ID": 3,
             "category": "Lodging",
             "date": "2019-11-10",
             "expenseName": "Electro Bill",
             "frequency": "Monthly",
             "income": false,
-            "qty": 1000
+            "qty": "1000"
         },
         {
-            "ID": 4,
+            "ID": 3,
             "category": "Lodging",
             "date": "2019-11-10",
             "expenseName": "Zemni Plyn",
             "frequency": "Monthly",
             "income": false,
-            "qty": 1600
+            "qty": "1600"
         },
         {
-            "ID": 5,
+            "ID": 4,
             "category": "Lodging",
             "date": "2019-11-10",
             "expenseName": "TV payment",
             "frequency": "Monthly",
             "income": false,
-            "qty": 135
+            "qty": "135"
         },
         {
-            "ID": 6,
+            "ID": 5,
             "category": "Others",
             "date": "2019-11-11",
             "expenseName": "Life Insurance",
             "frequency": "Monthly",
             "income": false,
-            "qty": 1500
+            "qty": "1500"
         },
         {
-            "ID": 7,
+            "ID": 6,
             "category": "Lodging",
             "date": "2019-11-11",
             "expenseName": "Flat fond oprav",
             "frequency": "Monthly",
             "income": false,
-            "qty": 1824
+            "qty": "1824"
         },
         {
-            "ID": 8,
+            "ID": 7,
             "category": "Entertainemt",
             "date": "2019-11-01",
             "expenseName": "UPC",
             "frequency": "Monthly",
             "income": false,
-            "qty": 430
+            "qty": "430"
         },
         {
-            "ID": 9,
+            "ID": 8,
             "category": "Lodging",
             "date": "2019-12-01",
             "expenseName": "Flat insurance",
             "frequency": "Yearly",
             "income": false,
-            "qty": 3316
+            "qty": "3316"
         },
         {
-            "ID": 10,
+            "ID": 9,
             "category": "Lodging",
             "date": "2019-12-01",
             "expenseName": "Radio payment",
             "frequency": "Yearly",
             "income": false,
-            "qty": 540
+            "qty": "540"
+        },
+        {
+            "ID": 10,
+            "category": "Savings",
+            "date": "2019-11-12",
+            "expenseName": "Saving Account!",
+            "frequency": "Monthly",
+            "income": false,
+            "qty": "10000"
         },
         {
             "ID": 11,
             "category": "Others",
-            "date": "2019-11-11",
-            "expenseName": "Expense Name",
-            "frequency": "Weekly",
+            "date": "2019-11-12",
+            "expenseName": "Karolina Kindergarden",
+            "frequency": "Monthly",
             "income": false,
-            "qty": 100
+            "qty": "7000"
         },
         {
             "ID": 12,
-            "category": "Others",
-            "date": "2019-11-11",
-            "expenseName": "New onE!!!",
-            "frequency": "Weekly",
+            "category": "Salary",
+            "date": "2019-11-12",
+            "expenseName": "Marketa Salry",
+            "frequency": "Monthly",
             "income": false,
-            "qty": 100
+            "qty": "7000"
         }
     ],
-    "modified": "2019-11-11 12:48:52.122259",
+    "modified": "2019-11-14 11:52:15.640688",
     "name": "name",
     "password": "81dc9bdb52d04dc20036dbd8313ed055"
 }

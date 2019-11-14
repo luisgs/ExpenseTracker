@@ -4,7 +4,8 @@ import PySimpleGUI as sg
 import hashlib
 import expensesinput, variables, expenseJSONFile
 
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+# Logging as output logging messages.
+logging.basicConfig(stream=sys.stderr, level=logging.CRITICAL)
 
 # Layout at first
 layout = [
