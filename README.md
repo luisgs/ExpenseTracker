@@ -35,7 +35,7 @@ I have also used Python 3.7.4 and lib (pip freeze):
 
 #### First Execution!
 First window will ask for username/password and a file. If file exists and user and password are right, you will see a new window with your information;
-eoc. app will create a new file with this information taht you typed in (name/password) and you will be redirect to a new window as well with empty values.
+EOC. app will create a new file with this information taht you typed in (name/password) and you will be redirect to a new window as well with empty values.
 
 #### Tracking a new expense!
 Simple complete all fields that are shown in tab1. Click confirm/submit and data will be stored in your file.
